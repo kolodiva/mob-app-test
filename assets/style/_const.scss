@@ -1,0 +1,113 @@
+$colorBlueMF: #00aec6;
+$colorGreyMF: #58595a;
+
+@font-face{
+    font-family: 'OpenSansCond';
+    	src: url("~assets/fonts/OpenSansCond.eot");
+    	src: url("~assets/fonts/OpenSansCond.eot?#iefix")format("embedded-opentype"),
+    	url("~assets/fonts/OpenSansCond.woff") format("woff"),
+    	url("~assets/fonts/OpenSansCond.ttf") format("truetype");
+    	font-style: normal;
+    	font-weight: normal;
+}
+
+@font-face{
+    font-family: 'RobotoCondensed';
+    	src: url("~assets/fonts/RobotoCondensed.eot");
+    	src: url("~assets/fonts/RobotoCondensed.eot?#iefix")format("embedded-opentype"),
+    	url("~assets/fonts/RobotoCondensed.woff") format("woff"),
+    	url("~assets/fonts/RobotoCondensed.ttf") format("truetype");
+    	font-style: normal;
+    	font-weight: normal;
+}
+
+
+.buttonMFBlueColor {
+  font-family: "OpenSansCond", sans-serif;
+  color: $colorBlueMF !important;
+  font-size: 1.4em !important;
+  font-weight: bold !important;
+  letter-spacing: 0.06em  !important;
+}
+.buttonMFWhiteColor {
+  font-family: 'OpenSansCond', sans-serif;
+  color: #fff !important;
+  font-size: 1.3em !important;
+  letter-spacing: 0.06em  !important;
+}
+
+.bigTextFooterWhiteColor {
+  font-family: 'OpenSansCond', sans-serif;
+  color: #fff;
+  font-size: 1.3em;
+  letter-spacing: 0.01em;
+  text-transform: uppercase;
+}
+.smallTextFooterWhiteColor {
+  font-family: 'OpenSansCond', sans-serif;
+  color: #fff;
+  font-size: 1.2em;
+  letter-spacing: 0.01em;
+}
+
+.buttonMFGreyColor {
+  font-family: 'OpenSansCond', sans-serif !important;
+  color: colorGreyMF !important;
+  font-size: 1.3em !important;
+  letter-spacing: 0.06em  !important;
+}
+.textMFGreyColor {
+  font-family: 'OpenSansCond', sans-serif !important;
+  color: #565656 !important;
+  font-size: 1.2em !important;
+  letter-spacing: -0.02em  !important;
+  text-transform: uppercase;
+}
+.buttonMFGreyColorSmall {
+  font-family: 'OpenSansCond', sans-serif !important;
+  color: colorGreyMF !important;
+  font-size: 1.1em !important;
+  letter-spacing: 0.02em  !important;
+}
+.buttonMFGreyColorBold {
+  font-family: 'OpenSansCond', sans-serif;
+  color: colorGreyMF !important;
+  font-weight: bold !important;
+  font-size: 1.3em !important;
+  letter-spacing: 0.06em  !important;
+}
+
+.buttonMFMenu::after {
+  display: inline-block;
+  margin-left: 0.255em;
+  vertical-align: 0.255em;
+  content: "";
+  border-top: 0.3em solid;
+  border-right: 0.3em solid transparent;
+  border-bottom: 0;
+  border-left: 0.3em solid transparent;
+}
+
+.greyMfBckg {
+  background-color: $colorGreyMF !important;
+}
+
+.blueMfBckg {
+  background-color: $colorBlueMF !important;
+}
+
+.greyMfText {
+  color: $colorGreyMF !important;
+}
+
+.blueMfText {
+  color: $colorBlueMF !important;
+}
+
+.greyMfBorder {
+  border: 1px solid #e5e5e5;
+}
+
+.fontSize1rem {
+  font-size: 1rem  !important;
+}

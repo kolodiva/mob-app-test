@@ -1,0 +1,42 @@
+{ "data" : {
+    "items": [
+    {
+      "id": 1,
+      "name": "Доставка",
+      "to": "",
+      "href":"",
+      "submenu" : [
+        {"name": "Москва",         "to": "",  "href":"https://www.newfurnitura.ru/advs/dostavka-moskva"},
+        {"name": "Новосибирск",    "to": "",  "href":"https://www.newfurnitura.ru/advs/dostavka-novosibirsk"},
+        {"name": "Екатеринбург",   "to": "",  "href":"https://www.newfurnitura.ru/advs/dostavka-yekaterinburg"},
+        {"name": "Ростов-на-Дону", "to": "",  "href":"https://www.newfurnitura.ru/advs/dostavka-rostov-na-donu"},
+        {"name": "Казань",         "to": "",  "href":"https://www.newfurnitura.ru/advs/dostavka-kazan"},
+        {"name": "Санкт-Петербург","to": "",  "href":"https://www.newfurnitura.ru/advs/dostavka-sankt-peterburg"},
+        {"name": "Краснодар",      "to": "",  "href":"https://www.newfurnitura.ru/advs/dostavka-krasnodar"}
+      ],
+      "css_class": "buttonMFGreyColor"
+    },
+    "|",
+    {
+      "id": 2,
+      "name": "Доп.условия",
+      "to":"",
+      "href":"",
+      "submenu" : [
+        {"name": "Возврат-Обмен", "to": "",  "href":"https://www.newfurnitura.ru/advs/vozvrat-obmen"},
+        {"name": "Спец.условия",  "to": "",  "ref":""}
+      ],
+      "css_class": "buttonMFGreyColor"
+    },
+    "|",
+  {
+    "id": 3,
+    "name": "addresses",
+    "to": "",
+    "href":"",
+    "submenu" : ""
+  }
+],
+"css_class": "buttonMFWhiteColor"
+}
+}

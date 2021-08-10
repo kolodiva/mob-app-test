@@ -1,0 +1,37 @@
+{ "data" : {
+    "items": [
+  {
+    "id": 1,
+    "name": "О компании",
+    "to":"",
+    "href":"https://www.newfurnitura.ru/advs/about-company",
+    "submenu" : ""
+  },
+  "|",
+  {
+    "id": 2,
+    "name": "Новости",
+    "href":"",
+    "to":"/news",
+    "submenu" : ""
+  },
+  "|",
+  {
+    "id": 3,
+    "name": "Полезное",
+    "href":"",
+    "to":"/service/downloads",
+    "submenu" : ""
+  },
+  "|",
+  {
+    "id": 4,
+    "name": "Контакты",
+    "href":"",
+    "to":"/contacts",
+    "submenu" : ""
+  }
+],
+"css_class": "buttonMFBlueColor"
+}
+}
