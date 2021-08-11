@@ -9,8 +9,8 @@
     <v-btn
       v-for="(item, i) in points"
       :key="i"
+      class="py-8"
       width="70%"
-      large
       rounded
       :style="backgroundColor"
       @click="$sounds.gun.play"
