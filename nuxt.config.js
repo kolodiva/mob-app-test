@@ -11,7 +11,7 @@ module.exports = {
       gun: {
         src: "/Probe-Gun.wav",
         options: {
-          volume: 0.75
+          volume: 0.5
         }
       }
     },
