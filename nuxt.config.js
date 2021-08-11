@@ -30,7 +30,17 @@ module.exports = {
   },
   head: {
     // titleTemplate: '%s - ' + process.env.npm_package_name,
-    //titleTemplate: '%s',
+    titleTemplate: '%s',
+    htmlAttrs: {
+        lang: 'ru',
+      },
+    title: process.env.npm_package_name || '',
+    meta: [
+      { charset: 'utf-8' },
+      { name: 'viewport', content: 'width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no' },
+      { name: 'google-site-verification', content: 'zYHlJzz8ftSxJgxT5pc4Fnq7thpCwbmn3bzu4knEnb4' },
+    ],
+    link: [{ rel: 'icon', type: 'image/x-icon', href: '/favicon.ico' }],
   },
   /*
    ** Customize the progress-bar color

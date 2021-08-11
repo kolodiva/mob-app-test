@@ -1,9 +1,9 @@
 <template>
-  <v-card :loading="loading" class="mx-auto my-12">
+  <v-card :loading="loading" class="mx-auto my-5">
     <template slot="progress">
       <v-progress-linear
         color="deep-purple"
-        height="10"
+        height="3"
         indeterminate
       ></v-progress-linear>
     </template>
