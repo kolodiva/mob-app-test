@@ -9,7 +9,7 @@
     <v-btn
       v-for="(item, i) in points"
       :key="i"
-      width="60%"
+      width="65%"
       large
       rounded
       :style="backgroundColor"
@@ -26,7 +26,11 @@ export default {
   data: () => ({
     loading: false,
     selection: 1,
-    backgroundColor: { backgroundColor: "#45f1e13b", color: "white" },
+    backgroundColor: {
+      backgroundColor: "#45f1e13b",
+      color: "white",
+      fontSize: "1rem",
+    },
     points: [
       "Немного теории",
       "Простой тест",
