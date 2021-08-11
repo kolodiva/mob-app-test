@@ -1,14 +1,6 @@
 <template>
   <v-app>
-    <v-app-bar
-      absolute
-      app
-      color="blue darken-3"
-      dark
-      dense
-      inverted-scroll
-      scroll-target="#scrolling-techniques-8"
-    >
+    <v-app-bar absolute app color="blue darken-3" dark dense>
       <v-app-bar-nav-icon @click="drawer = !drawer"></v-app-bar-nav-icon>
 
       <v-toolbar-title>Gonoreya</v-toolbar-title>
@@ -19,14 +11,6 @@
         }}</v-icon></v-btn
       >
     </v-app-bar>
-
-    <v-sheet
-      id="scrolling-techniques-8"
-      class="overflow-y-auto"
-      max-height="600"
-    >
-      <v-container style="height: 1500px"> </v-container>
-    </v-sheet>
 
     <v-navigation-drawer
       v-model="drawer"
@@ -51,6 +35,12 @@
           </v-list-item>
 
           <v-divider></v-divider>
+          <v-list-item>
+            <v-list-item-title>Начать сначала</v-list-item-title>
+          </v-list-item>
+          <v-list-item>
+            <v-list-item-title>Посмотреть историю</v-list-item-title>
+          </v-list-item>
         </v-list-item-group>
       </v-list>
     </v-navigation-drawer>

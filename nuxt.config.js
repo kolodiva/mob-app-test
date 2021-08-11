@@ -7,6 +7,14 @@ const fs = require('fs')
 module.exports = {
 
   //version: pkg.version,
+  sound: {
+      gun: {
+        src: "/Probe-Gun.wav",
+        options: {
+          volume: 0.25
+        }
+      }
+    },
 
   components: true,
   // server: {
@@ -91,6 +99,7 @@ module.exports = {
     // Doc: https://github.com/nuxt-community/stylelint-module
     '@nuxtjs/stylelint-module',
     '@nuxtjs/vuetify',
+    'nuxt-use-sound',
   ],
   /*
    ** Nuxt.js modules
