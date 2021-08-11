@@ -29,7 +29,7 @@ export default {
     backgroundColor: {
       backgroundColor: "#45f1e13b",
       color: "white",
-      fontSize: "1rem",
+      fontSize: "1.1rem",
     },
     points: [
       "Немного теории",
