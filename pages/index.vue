@@ -9,7 +9,7 @@
     </template>
 
     <v-img
-      height="250"
+      contain
       src="https://cdn.vuetifyjs.com/images/cards/cooking.png"
     ></v-img>
 
