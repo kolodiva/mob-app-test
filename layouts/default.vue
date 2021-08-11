@@ -1,7 +1,9 @@
 <template>
   <v-app>
     <v-main>
-      <Nuxt />
+      <v-container class="pa-0 mt-2" fluid>
+        <Nuxt />
+      </v-container>
     </v-main>
   </v-app>
 </template>
@@ -14,11 +16,3 @@ export default {
   data: () => ({ drawer: null }),
 };
 </script>
-
-<style lang="scss">
-body,
-html {
-  max-width: 100%;
-  overflow-x: hidden;
-}
-</style>
