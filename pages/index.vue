@@ -6,19 +6,16 @@
     img="/background-picture.jpg"
     class="d-flex flex-column justify-space-around align-center"
   >
-    <v-btn width="50%" color="primary" rounded @click="$sounds.gun.play"
-      >Теория</v-btn
-    >
-    <v-btn width="50%" color="white" outlined rounded @click="$sounds.gun.play"
-      >Простой тест</v-btn
-    >
-    <v-btn width="50%" color="primary" rounded @click="$sounds.gun.play"
-      >Средний тест</v-btn
-    >
-    <v-btn width="50%" color="primary" rounded @click="$sounds.gun.play"
-      >Сложный тест</v-btn
-    >
-    <div />
+    <v-btn
+      v-for="(item, i) in points"
+      :key="i"
+      width="60%"
+      large
+      rounded
+      :style="backgroundColor"
+      @click="$sounds.gun.play"
+      >{{ item }}
+    </v-btn>
     <div />
     <div />
   </v-card>
@@ -29,6 +26,13 @@ export default {
   data: () => ({
     loading: false,
     selection: 1,
+    backgroundColor: { backgroundColor: "#45f1e13b", color: "white" },
+    points: [
+      "Немного теории",
+      "Простой тест",
+      "Почти простой тест",
+      "НЕ Простой тест",
+    ],
   }),
 
   methods: {
