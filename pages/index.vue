@@ -9,13 +9,13 @@
     <v-btn width="50%" color="primary" rounded @click="$sounds.gun.play"
       >Теория</v-btn
     >
-    <v-btn width="50%" color="white" outlined @click="$sounds.gun.play"
+    <v-btn width="50%" color="white" outlined rounded @click="$sounds.gun.play"
       >Простой тест</v-btn
     >
-    <v-btn width="50%" color="primary" @click="$sounds.gun.play"
+    <v-btn width="50%" color="primary" rounded @click="$sounds.gun.play"
       >Средний тест</v-btn
     >
-    <v-btn width="50%" color="primary" @click="$sounds.gun.play"
+    <v-btn width="50%" color="primary" rounded @click="$sounds.gun.play"
       >Сложный тест</v-btn
     >
     <div />
