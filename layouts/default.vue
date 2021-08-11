@@ -11,7 +11,7 @@
 
 // const consola = require('consola')
 export default {
-  data: () => ({}),
+  data: () => ({ drawer: null }),
 };
 </script>
 
