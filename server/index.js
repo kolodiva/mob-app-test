@@ -25,7 +25,7 @@ async function start() {
     //host = '192.168.1.41'; port = 3000;
     //host = '192.168.1.105'; port = 5000;
 
-    host = 'localhost'; port = 5000;
+    host = 'localhost'; port = 3000;
     //host = 'localhost'; port = 7000;
   }
 
