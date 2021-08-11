@@ -18,7 +18,7 @@
       app
       disable-route-watcher
     >
-      <v-list nav dense>
+      <v-list nav>
         <v-list-item-group
           v-model="group"
           active-class="deep-purple--text text--accent-4"
