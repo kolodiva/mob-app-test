@@ -3,7 +3,6 @@
     <v-app-bar absolute app color="blue darken-3" dark dense>
       <v-app-bar-nav-icon @click="drawer = !drawer"></v-app-bar-nav-icon>
 
-      <v-toolbar-title>Gonoreya</v-toolbar-title>
       <v-spacer />
       <v-btn icon @click.stop="volumeHigh = !volumeHigh"
         ><v-icon>{{

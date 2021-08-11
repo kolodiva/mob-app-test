@@ -6,8 +6,10 @@
     img="/background-picture.jpg"
     class="d-flex flex-column justify-space-around align-center"
   >
-    <v-btn width="50%" color="primary" @click="$sounds.gun.play">Теория</v-btn>
-    <v-btn width="50%" color="primary" @click="$sounds.gun.play"
+    <v-btn width="50%" color="primary" rounded @click="$sounds.gun.play"
+      >Теория</v-btn
+    >
+    <v-btn width="50%" color="white" outlined @click="$sounds.gun.play"
       >Простой тест</v-btn
     >
     <v-btn width="50%" color="primary" @click="$sounds.gun.play"
@@ -16,6 +18,9 @@
     <v-btn width="50%" color="primary" @click="$sounds.gun.play"
       >Сложный тест</v-btn
     >
+    <div />
+    <div />
+    <div />
   </v-card>
 </template>
 
