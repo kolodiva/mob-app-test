@@ -9,7 +9,7 @@
     <v-btn
       v-for="(item, i) in points"
       :key="i"
-      width="65%"
+      width="70%"
       large
       rounded
       :style="backgroundColor"
