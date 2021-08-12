@@ -9,7 +9,7 @@
     <v-btn
       v-for="(item, i) in points"
       :key="i"
-      class="py-8"
+      class="py-6"
       width="70%"
       rounded
       :style="backgroundColor"
