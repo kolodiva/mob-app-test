@@ -53,6 +53,7 @@
 // import TheCucumbers from '@/components/TheCucumbers.vue'
 
 // const consola = require('consola')
+
 export default {
   data: () => ({ drawer: false, group: null, volumeHigh: true }),
 };

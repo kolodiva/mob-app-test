@@ -16,6 +16,8 @@
       @click.stop="$sounds.gun.play"
       >{{ item }}
     </v-btn>
+
+    <p v-for="(item, i) in quiz" :key="i">{{ item.make }}</p>
     <div />
     <div />
   </v-card>
@@ -46,8 +48,12 @@ export default {
   }),
   computed: {
     ...mapGetters({
-      quiz: "quiz/getInfo",
+      quiz: "quiz/getQuiz",
     }),
+  },
+
+  mounted() {
+    // console.log(this.quiz);
   },
 
   methods: {
