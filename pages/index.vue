@@ -13,7 +13,7 @@
       width="70%"
       rounded
       :style="backgroundColor"
-      @click="$sounds.gun.play"
+      @click.stop="$sounds.gun.play"
       >{{ item }}
     </v-btn>
     <div />
@@ -22,7 +22,13 @@
 </template>
 
 <script>
+import { mapGetters } from "vuex";
+
 export default {
+  // async fetch() {
+  //   const rows = await this.$api("getInfo", {});
+  //   console.log(rows);
+  // },
   data: () => ({
     loading: false,
     selection: 1,
@@ -38,6 +44,11 @@ export default {
       "НЕ Простой тест",
     ],
   }),
+  computed: {
+    ...mapGetters({
+      quiz: "quiz/getInfo",
+    }),
+  },
 
   methods: {
     reserve() {
