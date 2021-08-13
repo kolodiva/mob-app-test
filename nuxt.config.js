@@ -99,13 +99,13 @@ module.exports = {
     // Doc: https://github.com/nuxt-community/stylelint-module
     '@nuxtjs/stylelint-module',
     '@nuxtjs/vuetify',
-    'nuxt-use-sound',
   ],
   /*
    ** Nuxt.js modules
    */
   modules: [
     '@nuxtjs/axios',
+    'cookie-universal-nuxt',
   ],
 
   robots:[
