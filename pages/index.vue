@@ -13,11 +13,10 @@
       width="70%"
       rounded
       :style="backgroundColor"
-      @click.stop="$sounds.gun.play"
+      @click.stop="clickButton"
       >{{ item }}
     </v-btn>
 
-    <p v-for="(item, i) in quiz" :key="i">{{ item.make }}</p>
     <div />
     <div />
   </v-card>
@@ -49,6 +48,7 @@ export default {
   computed: {
     ...mapGetters({
       quiz: "quiz/getQuiz",
+      soundOff: "quiz/getSoundOff",
     }),
   },
 
@@ -57,6 +57,11 @@ export default {
   },
 
   methods: {
+    clickButton() {
+      if (!this.soundOff) {
+        this.$sounds.gun.play();
+      }
+    },
     reserve() {
       this.loading = true;
 

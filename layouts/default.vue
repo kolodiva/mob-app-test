@@ -4,9 +4,9 @@
       <v-app-bar-nav-icon @click="drawer = !drawer"></v-app-bar-nav-icon>
 
       <v-spacer />
-      <v-btn icon @click.stop="volumeHigh = !volumeHigh"
+      <v-btn icon @click.stop="switchSound"
         ><v-icon>{{
-          volumeHigh ? "mdi-volume-high" : "mdi-volume-mute"
+          soundOff === true ? "mdi-volume-mute" : "mdi-volume-high"
         }}</v-icon></v-btn
       >
     </v-app-bar>
@@ -50,11 +50,20 @@
 </template>
 
 <script>
-// import TheCucumbers from '@/components/TheCucumbers.vue'
-
+import { mapGetters } from "vuex";
 // const consola = require('consola')
 
 export default {
-  data: () => ({ drawer: false, group: null, volumeHigh: true }),
+  data: () => ({ drawer: false, group: null }),
+  computed: {
+    ...mapGetters({
+      soundOff: "quiz/getSoundOff",
+    }),
+  },
+  methods: {
+    async switchSound() {
+      await this.$store.dispatch("quiz/switchSound");
+    },
+  },
 };
 </script>

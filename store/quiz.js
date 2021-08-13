@@ -1,17 +1,14 @@
 export const state = () => ({
   quiz: [],
-  windowSize: {
-    x: 0,
-    y: 0,
-  },
+  soundOff: false,
 });
 
 export const mutations = {
   SET_QUIZ(state, data) {
     state.quiz = data;
   },
-  SET_WINDOW_SIZE(state, { x, y }) {
-    state.windowSize = { x, y };
+  SET_SOUND_OFF(state) {
+    state.soundOff = !state.soundOff;
   },
 };
 
@@ -19,8 +16,8 @@ export const getters = {
   getQuiz: (state) => {
     return state.quiz;
   },
-  getWindowSize: (state) => {
-    return state.windowSize;
+  getSoundOff: (state) => {
+    return state.soundOff;
   },
 };
 
@@ -29,5 +26,8 @@ export const actions = {
     const rows = await this.$api("getInfo");
     // consola.info(rows);
     await commit("SET_QUIZ", rows);
+  },
+  async switchSound({ commit, dispatch, state }) {
+    await commit("SET_SOUND_OFF");
   },
 };
