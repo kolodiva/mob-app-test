@@ -20,10 +20,12 @@
     "@mdi/js": "^5.9.55",
     "@nuxtjs/axios": "^5.13.0",
     "@vueuse/sound": "^1.1.7",
+    "cookie-universal-nuxt": "^2.1.5",
     "cross-env": "^7.0.2",
     "express": "^4.17.1",
     "mongodb": "^4.1.0",
-    "nuxt": "^2.14.6"
+    "nuxt": "^2.14.6",
+    "uuid": "^8.3.2"
   },
   "devDependencies": {
     "@nuxtjs/eslint-config": "^2.0.0",
