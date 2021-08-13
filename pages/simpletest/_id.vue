@@ -7,33 +7,27 @@
     class="pt-5"
   >
     <v-img :src="quiz[quest].pic" height="150px" contain class="" />
-    <v-card-title>Вопрос: {{ quest + 1 }}/{{ quiz.length }}</v-card-title>
+    <v-card-title class="pb-1"
+      >Вопрос: {{ quest + 1 }}/{{ quiz.length }}</v-card-title
+    >
 
-    <v-card-text>
-      <v-row align="center" class="mx-0">
-        <v-rating
-          :value="2.5"
-          color="amber"
-          dense
-          half-increments
-          readonly
-          size="14"
-          class="mb-4"
-        ></v-rating>
-      </v-row>
-
-      <div>{{ quiz[quest].quest }}</div>
+    <v-card-text style="font-size: 1.1rem">
+      {{ quiz[quest].quest }}
     </v-card-text>
 
-    <v-card-title class="mt-n8">Варианты анализов</v-card-title>
+    <v-card-title class="mt-n6">Варианты анализов</v-card-title>
 
     <v-card-text class="mt-n4">
       <v-chip-group
         v-model="selection1"
-        active-class="deep-purple accent-4 white--text"
+        active-class="blue accent-4 white--text"
         column
       >
-        <v-chip v-for="(item, i) in Object.entries(quiz[quest].var2)" :key="i">
+        <v-chip
+          v-for="(item, i) in Object.entries(quiz[quest].var2)"
+          :key="i"
+          @click.stop="$sounds.gun.play"
+        >
           {{ item[0] }}
         </v-chip>
       </v-chip-group>
@@ -44,16 +38,20 @@
     <v-card-text class="mt-n4">
       <v-chip-group
         v-model="selection2"
-        active-class="deep-purple accent-4 white--text"
+        active-class="blue accent-4 white--text"
         column
       >
-        <v-chip v-for="(item, i) in Object.entries(quiz[quest].var1)" :key="i">
+        <v-chip
+          v-for="(item, i) in Object.entries(quiz[quest].var1)"
+          :key="i"
+          @click.stop="$sounds.gun.play"
+        >
           {{ item[0] }}
         </v-chip>
       </v-chip-group>
     </v-card-text>
 
-    <v-card-actions class="mt-n4" fixed>
+    <v-card-actions class="mt-n4">
       <v-spacer />
       <v-btn light rounded small @click="reserve"> Продолжить </v-btn>
     </v-card-actions>
