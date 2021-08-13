@@ -61,6 +61,9 @@ export default {
       if (!this.soundOff) {
         this.$sounds.gun.play();
       }
+      this.$router.push({
+        path: "/simpletest/1",
+      });
     },
     reserve() {
       this.loading = true;
