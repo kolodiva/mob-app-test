@@ -56,7 +56,9 @@
 
     <v-card-actions class="">
       <v-spacer />
-      <v-btn light rounded @click="reserve"> Продолжить </v-btn>
+      <v-btn light :disabled="!able" rounded @click="reserve">
+        Продолжить
+      </v-btn>
     </v-card-actions>
   </v-card>
 </template>
@@ -77,8 +79,8 @@ export default {
   data: () => ({
     quest: 0,
     loading: false,
-    selection1: -1,
-    selection2: -1,
+    selection1: undefined,
+    selection2: undefined,
     backgroundColor: {
       backgroundColor: "#45f1e13b",
       color: "white",
@@ -91,6 +93,9 @@ export default {
       quiz: "quiz/getQuiz",
       soundOff: "quiz/getSoundOff",
     }),
+    able() {
+      return this.selection1 !== undefined && this.selection2 !== undefined;
+    },
   },
 
   mounted() {
