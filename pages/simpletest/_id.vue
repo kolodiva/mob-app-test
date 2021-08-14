@@ -6,12 +6,12 @@
     img="/background-picture.jpg"
     class="pt-5"
   >
-    <v-img :src="quiz[quest].pic" height="150px" contain class="" />
+    <v-img :src="quiz[quest].pic" max-width="90%" contain class="mx-auto" />
     <v-card-title class="pb-1"
       >Вопрос: {{ quest + 1 }}/{{ quiz.length }}</v-card-title
     >
 
-    <v-card-text style="font-size: 1.1rem">
+    <v-card-text style="font-size: 1.1rem" class="white--text">
       {{ quiz[quest].quest }}
     </v-card-text>
 
