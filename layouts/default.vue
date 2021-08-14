@@ -16,12 +16,11 @@
       :clipped="$vuetify.breakpoint.lgAndUp"
       app
       disable-route-watcher
+      src="/background-picture2.jpg"
+      dark
     >
-      <v-list nav>
-        <v-list-item-group
-          v-model="group"
-          active-class="deep-purple--text text--accent-4"
-        >
+      <v-list nav shaped>
+        <v-list-item-group v-model="group">
           <v-list-item two-line>
             <v-list-item-avatar>
               <v-img src="/avatar_anonim.png" />
@@ -34,7 +33,7 @@
           </v-list-item>
 
           <v-divider></v-divider>
-          <v-list-item>
+          <v-list-item nuxt to="/">
             <v-list-item-title>Начать сначала</v-list-item-title>
           </v-list-item>
           <v-list-item>
