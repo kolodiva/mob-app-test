@@ -7,10 +7,6 @@
     img="/background-picture.jpg"
     class="pt-5"
   >
-    <v-card-actions class="mt-n4">
-      <v-spacer />
-      <v-btn light rounded small @click="reserve"> Продолжить </v-btn>
-    </v-card-actions>
     <v-img :src="quiz[quest].pic" max-width="90%" contain class="mx-auto" />
     <v-card-title class="pb-1"
       >Вопрос: {{ quest + 1 }}/{{ quiz.length }}</v-card-title
@@ -31,7 +27,7 @@
         <v-chip
           v-for="(item, i) in Object.entries(quiz[quest].var2)"
           :key="i"
-          large
+          style="font-size: 1.2rem"
           @click.stop="$sounds.gun.play"
         >
           {{ item[0] }}
@@ -50,13 +46,18 @@
         <v-chip
           v-for="(item, i) in Object.entries(quiz[quest].var1)"
           :key="i"
-          large
+          style="font-size: 1.2rem"
           @click.stop="$sounds.gun.play"
         >
           {{ item[0] }}
         </v-chip>
       </v-chip-group>
     </v-card-text>
+
+    <v-card-actions class="">
+      <v-spacer />
+      <v-btn light rounded @click="reserve"> Продолжить </v-btn>
+    </v-card-actions>
   </v-card>
 </template>
 
