@@ -8,12 +8,25 @@ module.exports = {
 
   //version: pkg.version,
   sound: {
-      gun: {
-        src: "/Probe-Gun.wav",
+      itsok: {
+        src: "/itsok.mpeg",
+        options: {
+          volume: 0.3
+        }
+      },
+      itsgood: {
+        src: "/itsgood.mpeg",
+        options: {
+          volume: 0.3
+        }
+      },
+      itsbad: {
+        src: "/itsbad.mpeg",
         options: {
           volume: 0.3
         }
       }
+
     },
 
   components: true,

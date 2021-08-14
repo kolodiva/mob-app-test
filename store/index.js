@@ -5,13 +5,14 @@ export const strict = false;
 
 export const actions = {
   async nuxtServerInit({ dispatch, commit }, { req }) {
-    await dispatch("quiz/setQuiz");
-
-    const connectionid = this.$cookies.get("connectionid");
+    let connectionid = this.$cookies.get("connectionid");
 
     if (!connectionid) {
-      this.$cookies.set("connectionid", uuidv4());
+      connectionid = uuidv4();
+      this.$cookies.set("connectionid", connectionid);
     }
+
+    await dispatch("quiz/setQuiz");
 
     // await dispatch("service/setSlider");
     // await dispatch("nomenklator/loadSeoTextMain");

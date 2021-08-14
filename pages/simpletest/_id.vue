@@ -20,7 +20,7 @@
 
     <v-card-text class="mt-n4">
       <v-chip-group
-        v-model="selection1"
+        v-model="selection2"
         active-class="blue accent-4 white--text"
         column
       >
@@ -28,7 +28,7 @@
           v-for="(item, i) in Object.entries(quiz[quest].var2)"
           :key="i"
           style="font-size: 1.2rem"
-          @click.stop="$sounds.gun.play"
+          @click.stop="clickButton(2, i, selection2)"
         >
           {{ item[0] }}
         </v-chip>
@@ -39,7 +39,7 @@
 
     <v-card-text class="mt-n4">
       <v-chip-group
-        v-model="selection2"
+        v-model="selection1"
         active-class="blue accent-4 white--text"
         column
       >
@@ -47,7 +47,7 @@
           v-for="(item, i) in Object.entries(quiz[quest].var1)"
           :key="i"
           style="font-size: 1.2rem"
-          @click.stop="$sounds.gun.play"
+          @click.stop="clickButton(1, i, selection1)"
         >
           {{ item[0] }}
         </v-chip>
@@ -56,8 +56,8 @@
 
     <v-card-actions class="my-3">
       <v-spacer />
-      <v-btn light :disabled="!able" rounded @click="reserve">
-        Продолжить
+      <v-btn light :disabled="!able" rounded @click="contin">
+        {{ quiz.length === quest + 1 ? "Завершить" : "Продолжить" }}
       </v-btn>
     </v-card-actions>
   </v-card>
@@ -86,8 +86,8 @@ export default {
       color: "white",
       fontSize: "1.1rem",
     },
-    points: ["Тест1", "Тест2"],
   }),
+
   computed: {
     ...mapGetters({
       quiz: "quiz/getQuiz",
@@ -104,15 +104,38 @@ export default {
       parseInt(this.$route.params.id) - 1 > 9
         ? 0
         : parseInt(this.$route.params.id) - 1;
+    // console.log(this.quiz[this.quest]);
+    if (this.quiz[this.quest].res.var1 > 0) {
+      this.selection1 = this.quiz[this.quest].res.var1 - 1;
+    }
+    if (this.quiz[this.quest].res.var2 > 0) {
+      this.selection2 = this.quiz[this.quest].res.var2 - 1;
+    }
   },
 
   methods: {
-    clickButton() {
+    clickButton(variant, ind, select) {
       if (!this.soundOff) {
-        this.$sounds.gun.play();
+        this.$sounds.itsok.play();
       }
     },
-    reserve() {
+    async contin() {
+      if (!this.soundOff) {
+        this.$sounds.itsgood.play();
+      }
+
+      // console.log(this.lastQuiz);
+
+      await this.$store.dispatch("quiz/updateResQuiz", {
+        data: {
+          quest: this.quest,
+          var1: this.selection1,
+          var2: this.selection2,
+        },
+      });
+
+      // console.log(this.lastQuiz);
+
       const nextPage = this.quest + 2;
 
       if (nextPage > this.quiz.length) {

@@ -48,7 +48,6 @@ export default {
   }),
   computed: {
     ...mapGetters({
-      quiz: "quiz/getQuiz",
       soundOff: "quiz/getSoundOff",
     }),
   },
@@ -60,8 +59,12 @@ export default {
   methods: {
     clickButton() {
       if (!this.soundOff) {
-        this.$sounds.gun.play();
+        this.$sounds.itsok.play();
       }
+
+      // const connectionid = this.$cookies.get("connectionid");
+      // await this.$store.dispatch("quiz/createNewQuiz", connectionid);
+
       this.$router.push({
         path: "/simpletest/1",
       });
