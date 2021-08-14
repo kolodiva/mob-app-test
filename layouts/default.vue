@@ -27,17 +27,25 @@
             </v-list-item-avatar>
 
             <v-list-item-content>
-              <v-list-item-title>Приветствуем Вас</v-list-item-title>
-              <v-list-item-subtitle>Anonimus</v-list-item-subtitle>
+              <v-list-item-title style="font-size: 1.2rem"
+                >Приветствуем Вас</v-list-item-title
+              >
+              <v-list-item-subtitle style="font-size: 1.2rem"
+                >Anonimus</v-list-item-subtitle
+              >
             </v-list-item-content>
           </v-list-item>
 
           <v-divider></v-divider>
           <v-list-item nuxt to="/" @click="drawer = false">
-            <v-list-item-title>Начать сначала</v-list-item-title>
+            <v-list-item-title style="font-size: 1.2rem"
+              >Начать сначала</v-list-item-title
+            >
           </v-list-item>
           <v-list-item nuxt to="/" @click="drawer = false">
-            <v-list-item-title>Посмотреть историю</v-list-item-title>
+            <v-list-item-title style="font-size: 1.2rem"
+              >Посмотреть историю</v-list-item-title
+            >
           </v-list-item>
         </v-list-item-group>
       </v-list>
