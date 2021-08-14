@@ -23,7 +23,7 @@
         <v-list-item-group v-model="group">
           <v-list-item two-line>
             <v-list-item-avatar>
-              <v-img src="/avatar_anonim.png" />
+              <v-img src="/avatar_anonim.png" style="background-color: white" />
             </v-list-item-avatar>
 
             <v-list-item-content>
