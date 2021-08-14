@@ -1,6 +1,7 @@
 <template>
   <v-card
     flat
+    tile
     width="100%"
     height="100%"
     img="/background-picture.jpg"
