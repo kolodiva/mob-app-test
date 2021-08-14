@@ -54,7 +54,7 @@
       </v-chip-group>
     </v-card-text>
 
-    <v-card-actions class="">
+    <v-card-actions class="my-3">
       <v-spacer />
       <v-btn light :disabled="!able" rounded @click="reserve">
         Продолжить
