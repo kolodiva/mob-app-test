@@ -33,10 +33,10 @@
           </v-list-item>
 
           <v-divider></v-divider>
-          <v-list-item nuxt to="/">
+          <v-list-item nuxt to="/" @click="drawer = false">
             <v-list-item-title>Начать сначала</v-list-item-title>
           </v-list-item>
-          <v-list-item>
+          <v-list-item nuxt to="/" @click="drawer = false">
             <v-list-item-title>Посмотреть историю</v-list-item-title>
           </v-list-item>
         </v-list-item-group>
