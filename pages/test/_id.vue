@@ -1,5 +1,6 @@
 <template>
   <v-card
+    v-if="quiz[quest]"
     flat
     tile
     width="100%"
@@ -67,6 +68,7 @@
 import { mapGetters } from "vuex";
 
 export default {
+  middleware: ["redirect_home"],
   // async fetch() {
   //   const rows = await this.$api("getInfo", {});
   //   console.log(rows);
@@ -144,7 +146,7 @@ export default {
         });
       } else {
         this.$router.push({
-          path: `/simpletest/${nextPage}`,
+          path: `/test/${nextPage}`,
         });
       }
 

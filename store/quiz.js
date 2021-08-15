@@ -1,11 +1,25 @@
+import _ from "lodash";
+
 export const state = () => ({
   quiz: [],
+  curQuiz: [],
   soundOff: false,
 });
 
 export const mutations = {
   SET_QUIZ(state, data) {
     state.quiz = data;
+  },
+  SET_NEW_QUIZ(state, { connectionid, numQuest }) {
+    // state.quiz = data;
+
+    let newQuiz = _.shuffle(state.quiz).slice(0, numQuest);
+
+    if (numQuest === 15) {
+      newQuiz = _.shuffle(newQuiz.concat(newQuiz)).slice(0, numQuest);
+    }
+
+    state.curQuiz = _.shuffle(newQuiz);
   },
   UPDATE_LAST_QUIZ(state, data) {
     state.quiz[data.quest].res = {
@@ -38,7 +52,7 @@ export const mutations = {
 
 export const getters = {
   getQuiz: (state) => {
-    return state.quiz;
+    return state.curQuiz;
   },
   getSoundOff: (state) => {
     return state.soundOff;
@@ -54,10 +68,10 @@ export const actions = {
   async switchSound({ commit, dispatch, state }) {
     await commit("SET_SOUND_OFF");
   },
-  async createNewQuiz({ commit, dispatch, state }, connectionid) {
-    const { rows } = await this.$api("createNewQuiz", { connectionid });
+  async createNewQuiz({ commit, dispatch, state }, data) {
+    // const { rows } = await this.$api("createNewQuiz", { connectionid });
     // consola.info(rows);
-    await commit("SET_LAST_QUIZ", rows.res);
+    await commit("SET_NEW_QUIZ", data);
   },
   async updateResQuiz({ commit, dispatch, state }, { data }) {
     // const { rows } = await this.$api("createNewQuiz", { connectionid });

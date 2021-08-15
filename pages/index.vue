@@ -14,8 +14,8 @@
       width="70%"
       rounded
       :style="backgroundColor"
-      @click.stop="clickButton"
-      >{{ item }}
+      @click.stop="proxy(item[1], item[2])"
+      >{{ item[0] }}
     </v-btn>
 
     <div />
@@ -40,10 +40,10 @@ export default {
       fontSize: "1.1rem",
     },
     points: [
-      "Немного теории",
-      "Простой тест",
-      "Почти простой тест",
-      "НЕ Простой тест",
+      ["Немного теории", "theory", 0],
+      ["Простой тест", "clickButton", 2],
+      ["Почти простой тест", "clickButton", 10],
+      ["НЕ Простой тест", "clickButton", 15],
     ],
   }),
   computed: {
@@ -57,16 +57,23 @@ export default {
   },
 
   methods: {
-    clickButton() {
+    proxy(method, payload) {
+      this[method](payload);
+    },
+    theory() {},
+    async clickButton(numQuest) {
       if (!this.soundOff) {
         this.$sounds.itsok.play();
       }
 
-      // const connectionid = this.$cookies.get("connectionid");
-      // await this.$store.dispatch("quiz/createNewQuiz", connectionid);
+      const connectionid = this.$cookies.get("connectionid");
+      await this.$store.dispatch("quiz/createNewQuiz", {
+        connectionid,
+        numQuest,
+      });
 
       this.$router.push({
-        path: "/simpletest/1",
+        path: "/test/1",
       });
     },
     reserve() {

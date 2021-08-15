@@ -1,11 +1,12 @@
 // const consola = require('consola')
 
-export default function ({ $auth, route, redirect, store }) {
+export default async function ({ $auth, route, redirect, store }) {
   // const userEmail = store.getUserInfoEmail;
 
   // console.log("userEmail", store.getters["nomenklator/getUserInfoEmail"]);
+  const tmp = await store.getters["quiz/getQuiz"];
 
-  if (store.getters["nomenklator/getUserInfoEmail"]) {
+  if (tmp.length === 0) {
     redirect("/");
   }
 }
