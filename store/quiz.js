@@ -4,6 +4,7 @@ export const state = () => ({
   quiz: [],
   curQuiz: [],
   soundOff: false,
+  inTotale: 0,
 });
 
 export const mutations = {
@@ -22,7 +23,7 @@ export const mutations = {
     state.curQuiz = _.shuffle(newQuiz);
   },
   UPDATE_LAST_QUIZ(state, data) {
-    state.quiz[data.quest].res = {
+    state.quiz[data.curQuiz].res = {
       var1: data.var1 + 1,
       var2: data.var2 + 1,
     };
@@ -53,6 +54,9 @@ export const mutations = {
 export const getters = {
   getQuiz: (state) => {
     return state.curQuiz;
+  },
+  getInTotale: (state) => {
+    return state.inTotale;
   },
   getSoundOff: (state) => {
     return state.soundOff;

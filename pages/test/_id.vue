@@ -9,9 +9,10 @@
     class="pt-5"
   >
     <v-img :src="quiz[quest].pic" max-width="90%" contain class="mx-auto" />
-    <v-card-title class="pb-1"
-      >Вопрос: {{ quest + 1 }}/{{ quiz.length }}</v-card-title
-    >
+    <v-card-title class="pb-1 d-flex justify-space-between">
+      <div>Вопрос: {{ quest + 1 }}/{{ quiz.length }}</div>
+      <div>Баллоф: {{ inTotale }}</div>
+    </v-card-title>
 
     <v-card-text style="font-size: 1.2rem" class="white--text">
       {{ quiz[quest].quest }}
@@ -58,9 +59,33 @@
     <v-card-actions class="my-3">
       <v-spacer />
       <v-btn light :disabled="!able" rounded @click="contin">
-        {{ quiz.length === quest + 1 ? "Завершить" : "Продолжить" }}
+        {{ quiz.length === quest + 1 ? "Завершить" : "Далее" }}
       </v-btn>
     </v-card-actions>
+    <v-dialog v-model="dialogInTotal" persistent max-width="290">
+      <!-- <template v-slot:activator="{ on, attrs }">
+        <v-btn color="primary" dark v-bind="attrs" v-on="on">
+          Open Dialog
+        </v-btn>
+      </template> -->
+      <v-card>
+        <v-card-title class="text-h5">
+          Вы хотите начать<br />сначала?
+        </v-card-title>
+        <v-card-text
+          >Результаты Вашего текущего теста будут преданы забвенью.</v-card-text
+        >
+        <v-card-actions>
+          <v-spacer></v-spacer>
+          <v-btn color="green darken-1" text @click="resModalQuest(0)">
+            Не стоит
+          </v-btn>
+          <v-btn color="green darken-1" text @click="resModalQuest(1)">
+            Сначала
+          </v-btn>
+        </v-card-actions>
+      </v-card>
+    </v-dialog>
   </v-card>
 </template>
 
@@ -69,16 +94,8 @@ import { mapGetters } from "vuex";
 
 export default {
   middleware: ["redirect_home"],
-  // async fetch() {
-  //   const rows = await this.$api("getInfo", {});
-  //   console.log(rows);
-  // },
-  // fetch({ params }) {
-  //   if (params && params.id) {
-  //     this.quest = params.id;
-  //   }
-  // },
   data: () => ({
+    dialogInTotal: false,
     quest: 0,
     loading: false,
     selection1: undefined,
@@ -94,6 +111,7 @@ export default {
     ...mapGetters({
       quiz: "quiz/getQuiz",
       soundOff: "quiz/getSoundOff",
+      inTotale: "quiz/getInTotale",
     }),
     able() {
       return this.selection1 !== undefined && this.selection2 !== undefined;
