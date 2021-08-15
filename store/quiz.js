@@ -116,7 +116,7 @@ export const actions = {
 
     await this.$api("closeNewQuiz", {
       connectionid,
-      test: state.curQuiz,
+      test: [],
     });
   },
 };
