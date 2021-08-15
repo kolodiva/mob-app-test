@@ -145,9 +145,11 @@ export default {
       }
 
       // console.log(this.lastQuiz);
+      const connectionid = this.$cookies.get("connectionid");
 
       await this.$store.dispatch("quiz/updateResQuiz", {
         data: {
+          connectionid,
           quest: this.quest,
           var1: this.selection1,
           var2: this.selection2,

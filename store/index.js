@@ -12,7 +12,7 @@ export const actions = {
       this.$cookies.set("connectionid", connectionid);
     }
 
-    await dispatch("quiz/setQuiz");
+    await dispatch("quiz/setQuiz", { connectionid });
 
     // await dispatch("service/setSlider");
     // await dispatch("nomenklator/loadSeoTextMain");

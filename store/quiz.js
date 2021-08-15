@@ -11,6 +11,9 @@ export const mutations = {
   SET_QUIZ(state, data) {
     state.quiz = data;
   },
+  SET_CUR_QUIZ(state, data) {
+    state.curQuiz = data;
+  },
   SET_NEW_QUIZ(state, { connectionid, numQuest }) {
     // state.quiz = data;
 
@@ -23,28 +26,10 @@ export const mutations = {
     state.curQuiz = _.shuffle(newQuiz);
   },
   UPDATE_LAST_QUIZ(state, data) {
-    state.quiz[data.curQuiz].res = {
+    state.curQuiz[data.quest].res = {
       var1: data.var1 + 1,
       var2: data.var2 + 1,
     };
-    // const found = state.lastQuiz.filter((item) => {
-    //   return item.quest === data.quest;
-    // });
-    //
-    // if (found.length === 0) {
-    //   state.lastQuiz.push({
-    //     quest: data.quest,
-    //     var1: data.var1,
-    //     var2: data.var2,
-    //   });
-    //   // console.log(this.lastQuiz);
-    // } else {
-    //   found[0] = {
-    //     quest: data.quest,
-    //     var1: data.var1,
-    //     var2: data.var2,
-    //   };
-    // }
   },
   SET_SOUND_OFF(state) {
     state.soundOff = !state.soundOff;
@@ -64,10 +49,14 @@ export const getters = {
 };
 
 export const actions = {
-  async setQuiz({ commit, dispatch, state }) {
-    const rows = await this.$api("getInfo");
-    // consola.info(rows);
+  async setQuiz({ commit, dispatch, state }, { connectionid }) {
+    let rows = await this.$api("getInfo");
     await commit("SET_QUIZ", rows);
+    rows = await this.$api("getInfoCurQuiz", { connectionid });
+
+    if (rows[0]) {
+      await commit("SET_CUR_QUIZ", rows[0].res);
+    }
   },
   async switchSound({ commit, dispatch, state }) {
     await commit("SET_SOUND_OFF");
@@ -75,11 +64,19 @@ export const actions = {
   async createNewQuiz({ commit, dispatch, state }, data) {
     // const { rows } = await this.$api("createNewQuiz", { connectionid });
     // consola.info(rows);
-    await commit("SET_NEW_QUIZ", data);
+    if (state.curQuiz.length === 0) {
+      await commit("SET_NEW_QUIZ", data);
+    }
   },
   async updateResQuiz({ commit, dispatch, state }, { data }) {
-    // const { rows } = await this.$api("createNewQuiz", { connectionid });
     // consola.info(rows);
     await commit("UPDATE_LAST_QUIZ", data);
+
+    // console.log(state.curQuiz);
+
+    await this.$api("createNewQuiz", {
+      connectionid: data.connectionid,
+      test: state.curQuiz,
+    });
   },
 };

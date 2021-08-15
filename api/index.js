@@ -5,7 +5,12 @@ export async function getInfo() {
   return await mongo.db('sampleDB').collection('simpleTest').find({}).toArray();
 }
 
-export async function createNewQuiz({connectionid}) {
+export async function getInfoCurQuiz({connectionid}) {
+  await mongo.connect();
+  return await mongo.db('sampleDB').collection('history').find({connectionid: connectionid}).toArray();
+}
+
+export async function createNewQuiz({connectionid, test}) {
 
   //console.log(connectionid);
 
@@ -14,7 +19,7 @@ export async function createNewQuiz({connectionid}) {
   //const res1 = await mongo.db('sampleDB').collection('history').find({}).toArray();
   const res1 = await mongo.db('sampleDB').collection('history').findOneAndUpdate(
     {connectionid: connectionid, completed: false},
-    { '$setOnInsert': {completed: false, res: []}},
+    { '$set': {completed: false, res: test}},
     {returnDocument: 'after', upsert: true}
   );
 
