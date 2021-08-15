@@ -66,9 +66,7 @@ export default {
         this.$sounds.itsok.play();
       }
 
-      const connectionid = this.$cookies.get("connectionid");
       await this.$store.dispatch("quiz/createNewQuiz", {
-        connectionid,
         numQuest,
       });
 

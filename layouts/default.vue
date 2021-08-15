@@ -96,9 +96,11 @@ export default {
     }),
   },
   methods: {
-    resModalQuest(idx) {
+    async resModalQuest(idx) {
       this.dialogStartPage = false;
       if (idx === 1) {
+        await this.$store.dispatch("quiz/clearResQuiz");
+
         this.$router.push({
           path: "/",
         });

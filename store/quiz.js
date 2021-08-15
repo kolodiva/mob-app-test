@@ -14,7 +14,7 @@ export const mutations = {
   SET_CUR_QUIZ(state, data) {
     state.curQuiz = data;
   },
-  SET_NEW_QUIZ(state, { connectionid, numQuest }) {
+  SET_NEW_QUIZ(state, { numQuest }) {
     // state.quiz = data;
 
     let newQuiz = _.shuffle(state.quiz).slice(0, numQuest);
@@ -73,9 +73,22 @@ export const actions = {
     await commit("UPDATE_LAST_QUIZ", data);
 
     // console.log(state.curQuiz);
+    const connectionid = this.$cookies.get("connectionid");
 
     await this.$api("createNewQuiz", {
-      connectionid: data.connectionid,
+      connectionid,
+      test: state.curQuiz,
+    });
+  },
+  async clearResQuiz({ commit, dispatch, state }) {
+    // consola.info(rows);
+    await commit("SET_CUR_QUIZ", []);
+
+    // console.log(state.curQuiz);
+    const connectionid = this.$cookies.get("connectionid");
+
+    await this.$api("createNewQuiz", {
+      connectionid,
       test: state.curQuiz,
     });
   },
