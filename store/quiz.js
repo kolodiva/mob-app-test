@@ -109,7 +109,7 @@ export const actions = {
   },
   async closeResQuiz({ commit, dispatch, state }) {
     // consola.info(rows);
-    // await commit("SET_CUR_QUIZ", []);
+    await commit("SET_CUR_QUIZ", []);
 
     // console.log(state.curQuiz);
     const connectionid = this.$cookies.get("connectionid");

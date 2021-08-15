@@ -8,7 +8,13 @@
     img="/background-picture.jpg"
     class="pt-5"
   >
-    <v-img :src="quiz[quest].pic" max-width="90%" contain class="mx-auto" />
+    <v-img
+      :src="quiz[quest].pic"
+      max-width="90%"
+      min-height="170px"
+      contain
+      class="mx-auto"
+    />
     <v-card-title class="pb-1 d-flex justify-space-between">
       <div>Вопрос: {{ quest + 1 }}/{{ quiz.length }}</div>
       <div>Баллоф: {{ inTotale }}</div>
@@ -120,7 +126,7 @@ export default {
   mounted() {
     // console.log(this.quiz);
     this.quest =
-      parseInt(this.$route.params.id) - 1 > 9
+      parseInt(this.$route.params.id) > this.quiz.length
         ? 0
         : parseInt(this.$route.params.id) - 1;
     // console.log(this.quiz[this.quest]);
