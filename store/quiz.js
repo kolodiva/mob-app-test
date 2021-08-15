@@ -64,8 +64,19 @@ export const actions = {
   async createNewQuiz({ commit, dispatch, state }, data) {
     // const { rows } = await this.$api("createNewQuiz", { connectionid });
     // consola.info(rows);
-    if (state.curQuiz.length === 0) {
+    const newTest = state.curQuiz.length !== data.numQuest;
+
+    if (state.curQuiz.length === 0 || newTest) {
       await commit("SET_NEW_QUIZ", data);
+    }
+
+    if (newTest) {
+      const connectionid = this.$cookies.get("connectionid");
+
+      await this.$api("createNewQuiz", {
+        connectionid,
+        test: state.curQuiz,
+      });
     }
   },
   async updateResQuiz({ commit, dispatch, state }, { data }) {
@@ -80,6 +91,10 @@ export const actions = {
       test: state.curQuiz,
     });
   },
+  async clearOnlyResQuiz({ commit, dispatch, state }) {
+    // consola.info(rows);
+    await commit("SET_CUR_QUIZ", []);
+  },
   async clearResQuiz({ commit, dispatch, state }) {
     // consola.info(rows);
     await commit("SET_CUR_QUIZ", []);
@@ -88,6 +103,18 @@ export const actions = {
     const connectionid = this.$cookies.get("connectionid");
 
     await this.$api("createNewQuiz", {
+      connectionid,
+      test: state.curQuiz,
+    });
+  },
+  async closeResQuiz({ commit, dispatch, state }) {
+    // consola.info(rows);
+    // await commit("SET_CUR_QUIZ", []);
+
+    // console.log(state.curQuiz);
+    const connectionid = this.$cookies.get("connectionid");
+
+    await this.$api("closeNewQuiz", {
       connectionid,
       test: state.curQuiz,
     });

@@ -70,18 +70,17 @@
       </template> -->
       <v-card>
         <v-card-title class="text-h5">
-          Вы хотите начать<br />сначала?
+          Поздравляем,<br />
+          Вы завершили тест!!!
         </v-card-title>
         <v-card-text
-          >Результаты Вашего текущего теста будут преданы забвенью.</v-card-text
+          >Результаты Вашего текущего теста будут помещены в Исторический Архив
+          и будут доступны следующие 100 лет.</v-card-text
         >
         <v-card-actions>
           <v-spacer></v-spacer>
           <v-btn color="green darken-1" text @click="resModalQuest(0)">
-            Не стоит
-          </v-btn>
-          <v-btn color="green darken-1" text @click="resModalQuest(1)">
-            Сначала
+            Ок, Бро.
           </v-btn>
         </v-card-actions>
       </v-card>
@@ -134,6 +133,24 @@ export default {
   },
 
   methods: {
+    async resModalQuest(idx) {
+      await this.$store.dispatch("quiz/closeResQuiz");
+      await this.$store.dispatch("quiz/clearOnlyResQuiz");
+
+      this.dialogInTotal = false;
+
+      this.$router.push({
+        path: "/",
+      });
+
+      // if (idx === 1) {
+      //   await this.$store.dispatch("quiz/clearResQuiz");
+      //
+      //   this.$router.push({
+      //     path: "/",
+      //   });
+      // }
+    },
     clickButton(variant, ind, select) {
       if (!this.soundOff) {
         this.$sounds.itsok.play();
@@ -154,18 +171,29 @@ export default {
       });
 
       // console.log(this.lastQuiz);
-
-      const nextPage = this.quest + 2;
-
-      if (nextPage > this.quiz.length) {
-        this.$router.push({
-          path: "/",
-        });
+      if (this.quiz.length === this.quest + 1) {
+        this.dialogInTotal = true;
       } else {
+        const nextPage = this.quest + 2;
+
         this.$router.push({
           path: `/test/${nextPage}`,
         });
       }
+
+      // const nextPage = this.quest + 2;
+      //
+      // if (nextPage > this.quiz.length) {
+      //   await this.$store.dispatch("quiz/clearOnlyResQuiz");
+      //
+      //   this.$router.push({
+      //     path: "/",
+      //   });
+      // } else {
+      //   this.$router.push({
+      //     path: `/test/${nextPage}`,
+      //   });
+      // }
 
       // this.loading = true;
       //
