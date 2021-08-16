@@ -11,19 +11,19 @@ module.exports = {
       itsok: {
         src: "/itsok.mpeg",
         options: {
-          volume: 1
+          volume: 0.5
         }
       },
       itsgood: {
         src: "/itsgood.mpeg",
         options: {
-          volume: 0.7
+          volume: 0.5
         }
       },
       itsbad: {
         src: "/itsbad.mpeg",
         options: {
-          volume: 1
+          volume: 0.5
         }
       }
 
