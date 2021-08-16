@@ -69,9 +69,10 @@ export const actions = {
   async createNewQuiz({ commit, dispatch, state }, data) {
     // const { rows } = await this.$api("createNewQuiz", { connectionid });
     // consola.info(rows);
-    const newTest = state.curQuiz.length !== data.numQuest;
+    const newTest =
+      state.curQuiz.length === 0 || state.curQuiz.length !== data.numQuest;
 
-    if (state.curQuiz.length === 0 || newTest) {
+    if (newTest) {
       await commit("SET_NEW_QUIZ", data);
     }
 
