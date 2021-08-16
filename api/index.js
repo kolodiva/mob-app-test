@@ -26,7 +26,7 @@ export async function createNewQuiz({connectionid, test}) {
   return {rows: res1.value}
 }
 
-export async function closeNewQuiz({connectionid, test}) {
+export async function closeNewQuiz({connectionid, test, score}) {
 
   //console.log(connectionid);
 
@@ -35,7 +35,7 @@ export async function closeNewQuiz({connectionid, test}) {
   //const res1 = await mongo.db('sampleDB').collection('history').find({}).toArray();
   await mongo.db('sampleDB').collection('history').findOneAndUpdate(
     {connectionid: connectionid, completed: false},
-    { '$set': {completed: true, res: test}},
+    { '$set': {completed: true, res: test, score: score}},
     {returnDocument: 'after', upsert: true}
   );
 

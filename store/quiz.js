@@ -4,7 +4,6 @@ export const state = () => ({
   quiz: [],
   curQuiz: [],
   soundOff: false,
-  inTotale: 0,
 });
 
 export const mutations = {
@@ -32,6 +31,8 @@ export const mutations = {
       var1: data.var1 + 1,
       var2: data.var2 + 1,
     };
+    state.curQuiz[data.quest].score = data.score;
+    state.curQuiz[data.quest].passed = data.passed;
   },
   SET_SOUND_OFF(state) {
     state.soundOff = !state.soundOff;
@@ -43,7 +44,13 @@ export const getters = {
     return state.curQuiz;
   },
   getInTotale: (state) => {
-    return state.inTotale;
+    let inTotal = 0;
+
+    state.curQuiz.forEach((item, i) => {
+      inTotal += item.score;
+    });
+
+    return inTotal;
   },
   getSoundOff: (state) => {
     return state.soundOff;
@@ -118,10 +125,17 @@ export const actions = {
     // await commit("SET_CUR_QUIZ", []);
 
     // console.log(state.curQuiz);
+    let score = 0;
+
+    state.curQuiz.forEach((item, i) => {
+      score += item.score;
+    });
+
     const connectionid = this.$cookies.get("connectionid");
 
     await this.$api("closeNewQuiz", {
       connectionid,
+      score,
       test: state.curQuiz,
     });
   },

@@ -17,7 +17,7 @@
     />
     <v-card-title class="pb-1 d-flex justify-space-between">
       <div>Вопрос: {{ quest + 1 }}/{{ quiz.length }}</div>
-      <div>Баллоф: {{ inTotale }}</div>
+      <div>Баллоф: {{ score }}/{{ inTotale }}</div>
     </v-card-title>
 
     <v-card-text style="font-size: 1.2rem" class="white--text">
@@ -45,6 +45,13 @@
           @click.stop="clickButton(2, i, selection2)"
         >
           {{ item[0] }}
+          <v-chip
+            v-if="i === trueAnswer[1] && passed"
+            class="ml-1"
+            color="green"
+            x-small
+            >ок</v-chip
+          >
         </v-chip>
       </v-chip-group>
     </v-card-text>
@@ -64,6 +71,13 @@
           @click.stop="clickButton(1, i, selection1)"
         >
           {{ item[0] }}
+          <v-chip
+            v-if="i === trueAnswer[0] && passed"
+            class="ml-1"
+            color="green"
+            x-small
+            >ок</v-chip
+          >
         </v-chip>
       </v-chip-group>
     </v-card-text>
@@ -77,15 +91,36 @@
       <v-card>
         <v-card-title class="text-h5">
           Поздравляем,<br />
-          Вы завершили тест!!!
+          Вы завершили тест. <br />Ваш результат
+          {{ inTotale }} балла(ов).<br />Такого еще НЕ было в истории тестов !!!
         </v-card-title>
         <v-card-text
-          >Результаты Вашего текущего теста будут помещены в Исторический Архив
-          и будут доступны следующие 100 лет.</v-card-text
+          >Ваши Результаты будут помещены в Исторический Архив и будут доступны
+          в следующие 100 лет.</v-card-text
         >
         <v-card-actions>
           <v-spacer></v-spacer>
           <v-btn color="green darken-1" text @click="resModalQuest(0)">
+            Ок, Бро.
+          </v-btn>
+        </v-card-actions>
+      </v-card>
+    </v-dialog>
+    <v-dialog v-model="dialogNoChange" persistent max-width="290">
+      <!-- <template v-slot:activator="{ on, attrs }">
+        <v-btn color="primary" dark v-bind="attrs" v-on="on">
+          Open Dialog
+        </v-btn>
+      </template> -->
+      <v-card>
+        <v-card-title class="text-h5"> Сожалеем !!! </v-card-title>
+        <v-card-text
+          >Данный пункт был пройден Вами и изменить его уже нельзя. Допустимо
+          только созерцание.</v-card-text
+        >
+        <v-card-actions>
+          <v-spacer></v-spacer>
+          <v-btn color="green darken-1" text @click="dialogNoChange = false">
             Ок, Бро.
           </v-btn>
         </v-card-actions>
@@ -101,6 +136,7 @@ export default {
   middleware: ["redirect_home"],
   data: () => ({
     dialogInTotal: false,
+    dialogNoChange: false,
     quest: 0,
     loading: false,
     selection1: undefined,
@@ -110,6 +146,9 @@ export default {
       color: "white",
       fontSize: "1.1rem",
     },
+    trueAnswer: [],
+    score: 0,
+    passed: 0,
   }),
 
   computed: {
@@ -120,6 +159,19 @@ export default {
     }),
     able() {
       return this.selection1 !== undefined && this.selection2 !== undefined;
+    },
+  },
+
+  watch: {
+    selection1(newVal, oldVal) {
+      if (this.passed === 1 && oldVal) {
+        this.dialogNoChange = true;
+      }
+    },
+    selection2(newVal, oldVal) {
+      if (this.passed === 1 && oldVal) {
+        this.dialogNoChange = true;
+      }
     },
   },
 
@@ -136,6 +188,26 @@ export default {
     if (this.quiz[this.quest].res.var2 > 0) {
       this.selection2 = this.quiz[this.quest].res.var2 - 1;
     }
+
+    //
+    const quiz = this.quiz[this.quest];
+
+    this.trueAnswer = [];
+
+    Object.entries(quiz.var1).forEach((item, i) => {
+      if (item[1] === 1) {
+        this.trueAnswer.push(i);
+      }
+    });
+
+    Object.entries(quiz.var2).forEach((item, i) => {
+      if (item[1] === 1) {
+        this.trueAnswer.push(i);
+      }
+    });
+
+    this.score = quiz.score;
+    this.passed = quiz.passed;
   },
 
   methods: {
@@ -148,14 +220,6 @@ export default {
       this.$router.push({
         path: "/",
       });
-
-      // if (idx === 1) {
-      //   await this.$store.dispatch("quiz/clearResQuiz");
-      //
-      //   this.$router.push({
-      //     path: "/",
-      //   });
-      // }
     },
     clickButton(variant, ind, select) {
       if (!this.soundOff) {
@@ -163,20 +227,34 @@ export default {
       }
     },
     async contin() {
-      if (!this.soundOff) {
-        this.$sounds.itsgood.play();
+      if (this.passed === 1) {
+      } else {
+        const score =
+          (this.trueAnswer[0] === this.selection1 ? 0.5 : 0) +
+          (this.trueAnswer[1] === this.selection2 ? 0.5 : 0);
+
+        if (!this.soundOff) {
+          if (score === 1) {
+            this.$sounds.itsgood.play();
+          } else {
+            this.$sounds.itsbad.play();
+          }
+        }
+
+        // console.log(quiz);
+
+        // console.log(this.lastQuiz);
+        await this.$store.dispatch("quiz/updateResQuiz", {
+          data: {
+            quest: this.quest,
+            var1: this.selection1,
+            var2: this.selection2,
+            score,
+            passed: 1,
+          },
+        });
       }
 
-      // console.log(this.lastQuiz);
-      await this.$store.dispatch("quiz/updateResQuiz", {
-        data: {
-          quest: this.quest,
-          var1: this.selection1,
-          var2: this.selection2,
-        },
-      });
-
-      // console.log(this.lastQuiz);
       if (this.quiz.length === this.quest + 1) {
         this.dialogInTotal = true;
       } else {
@@ -186,24 +264,6 @@ export default {
           path: `/test/${nextPage}`,
         });
       }
-
-      // const nextPage = this.quest + 2;
-      //
-      // if (nextPage > this.quiz.length) {
-      //   await this.$store.dispatch("quiz/clearOnlyResQuiz");
-      //
-      //   this.$router.push({
-      //     path: "/",
-      //   });
-      // } else {
-      //   this.$router.push({
-      //     path: `/test/${nextPage}`,
-      //   });
-      // }
-
-      // this.loading = true;
-      //
-      // setTimeout(() => (this.loading = false), 2000);
     },
   },
 };
