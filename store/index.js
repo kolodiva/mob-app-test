@@ -9,7 +9,10 @@ export const actions = {
 
     if (!connectionid) {
       connectionid = uuidv4();
-      this.$cookies.set("connectionid", connectionid);
+      this.$cookies.set("connectionid", connectionid, {
+        path: "/",
+        maxAge: 60 * 60 * 24 * 60,
+      });
     }
 
     await dispatch("quiz/setQuiz", { connectionid });

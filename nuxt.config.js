@@ -17,7 +17,7 @@ module.exports = {
       itsgood: {
         src: "/itsgood.mpeg",
         options: {
-          volume: 1
+          volume: 0.7
         }
       },
       itsbad: {
