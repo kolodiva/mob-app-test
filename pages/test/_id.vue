@@ -24,9 +24,15 @@
       {{ quiz[quest].quest }}
     </v-card-text>
 
-    <v-card-title class="mt-n6">Варианты анализов</v-card-title>
+    <v-card-actions class="mt-n6"
+      ><v-card-title>Варианты анализов</v-card-title>
+      <v-spacer />
+      <v-btn light :disabled="!able" rounded @click="contin">
+        {{ quiz.length === quest + 1 ? "Завершить" : "Далее" }}
+      </v-btn>
+    </v-card-actions>
 
-    <v-card-text class="mt-n4">
+    <v-card-text class="mt-n8">
       <v-chip-group
         v-model="selection2"
         active-class="blue accent-4 white--text"
@@ -43,7 +49,7 @@
       </v-chip-group>
     </v-card-text>
 
-    <v-card-title class="mt-n8">Варианты ответов</v-card-title>
+    <v-card-title class="mt-n6">Варианты ответов</v-card-title>
 
     <v-card-text class="mt-n4">
       <v-chip-group
@@ -62,12 +68,6 @@
       </v-chip-group>
     </v-card-text>
 
-    <v-card-actions class="my-3">
-      <v-spacer />
-      <v-btn light :disabled="!able" rounded @click="contin">
-        {{ quiz.length === quest + 1 ? "Завершить" : "Далее" }}
-      </v-btn>
-    </v-card-actions>
     <v-dialog v-model="dialogInTotal" persistent max-width="290">
       <!-- <template v-slot:activator="{ on, attrs }">
         <v-btn color="primary" dark v-bind="attrs" v-on="on">
