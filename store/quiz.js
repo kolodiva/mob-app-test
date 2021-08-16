@@ -17,20 +17,15 @@ export const mutations = {
   SET_NEW_QUIZ(state, { numQuest }) {
     // state.quiz = data;
 
-    let newQuiz = [];
+    const newQuiz = _.shuffle(state.quiz);
 
-    console.log(state.quiz);
-
+    // console.log(state.quiz);
     if (numQuest === 15) {
-      newQuiz = _.shuffle(newQuiz.concat(state.quiz.concat(state.quiz))).slice(
-        0,
-        numQuest
-      );
+      state.curQuiz = _.shuffle([...newQuiz, ...newQuiz]).slice(0, numQuest);
     } else {
-      newQuiz = _.shuffle(state.quiz).slice(0, numQuest);
+      state.curQuiz = _.shuffle(newQuiz.slice(0, numQuest));
     }
-
-    state.curQuiz = _.shuffle(newQuiz);
+    //console.log(state.curQuiz);
   },
   UPDATE_LAST_QUIZ(state, data) {
     state.curQuiz[data.quest].res = {
