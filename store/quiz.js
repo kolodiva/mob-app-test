@@ -14,13 +14,12 @@ export const mutations = {
   SET_CUR_QUIZ(state, data) {
     state.curQuiz = data;
   },
-  SET_CLEAR_CUR_QUIZ(state, { numQuest }) {
-    state.curQuiz = [];
-  },
   SET_NEW_QUIZ(state, { numQuest }) {
     // state.quiz = data;
 
     let newQuiz = [];
+
+    console.log(state.quiz);
 
     if (numQuest === 15) {
       newQuiz = _.shuffle(newQuiz.concat(state.quiz.concat(state.quiz))).slice(
@@ -28,7 +27,7 @@ export const mutations = {
         numQuest
       );
     } else {
-      newQuiz = _.shuffle(newQuiz.concat(state.quiz)).slice(0, numQuest);
+      newQuiz = _.shuffle(state.quiz).slice(0, numQuest);
     }
 
     state.curQuiz = _.shuffle(newQuiz);
@@ -76,7 +75,9 @@ export const actions = {
       state.curQuiz.length === 0 || state.curQuiz.length !== data.numQuest;
 
     if (newTest) {
-      await commit("SET_CLEAR_CUR_QUIZ", data);
+      const rows = await this.$api("getInfo");
+      await commit("SET_QUIZ", rows);
+
       await commit("SET_NEW_QUIZ", data);
     }
 
