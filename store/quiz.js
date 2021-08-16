@@ -14,6 +14,9 @@ export const mutations = {
   SET_CUR_QUIZ(state, data) {
     state.curQuiz = data;
   },
+  SET_CLEAR_CUR_QUIZ(state, { numQuest }) {
+    state.curQuiz = [];
+  },
   SET_NEW_QUIZ(state, { numQuest }) {
     // state.quiz = data;
 
@@ -73,6 +76,7 @@ export const actions = {
       state.curQuiz.length === 0 || state.curQuiz.length !== data.numQuest;
 
     if (newTest) {
+      await commit("SET_CLEAR_CUR_QUIZ", data);
       await commit("SET_NEW_QUIZ", data);
     }
 

@@ -51,7 +51,7 @@ module.exports = {
   },
   head: {
     // titleTemplate: '%s - ' + process.env.npm_package_name,
-    titleTemplate: '%s',
+    titleTemplate: 'Тест Макаровой',
     htmlAttrs: {
         lang: 'ru',
       },
