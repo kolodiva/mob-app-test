@@ -24,6 +24,18 @@
             style="font-size: 1.1rem"
           >
             {{ i1 + 1 }}. {{ item1.quest }}
+            <v-card-text style="font-size: 1rem">
+              Баллы:
+              {{ item1.score }},<br />
+              Ваши ответы:
+              {{ Object.entries(item1.var1)[item1.res.var1 - 1][0] }},
+              {{ Object.entries(item1.var2)[item1.res.var2 - 1][0] }}<br />
+              Правильные ответы:
+              {{
+                Object.keys(item1.var1).find((key) => item1.var1[key] === 1)
+              }},
+              {{ Object.keys(item1.var2).find((key) => item1.var2[key] === 1) }}
+            </v-card-text>
           </v-card-text>
         </v-expansion-panel-content>
       </v-expansion-panel>
