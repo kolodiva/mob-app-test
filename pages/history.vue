@@ -14,7 +14,8 @@
         :style="backgroundColor"
       >
         <v-expansion-panel-header style="font-size: 1.2rem">
-          Тест от {{ item.data_test }}, {{ item.score }} бал.
+          Тест от {{ item.data_test }},<br />{{ item.res.length }} вопр.,
+          {{ item.score }} бал.
         </v-expansion-panel-header>
         <v-expansion-panel-content>
           <v-card-text

@@ -4,7 +4,7 @@ function getDateTime() {
 
   var today = new Date();
   var date = today.getDate() + '-' + (today.getMonth()+1) + '-' + today.getFullYear();
-  var time = today.getHours() + ":" + today.getMinutes() + ":" + today.getSeconds();
+  var time = (today.getHours() + 3) + ":" + today.getMinutes();
   var dateTime = date + ' ' + time;
 
     return dateTime;
