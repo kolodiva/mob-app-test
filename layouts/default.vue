@@ -2,6 +2,7 @@
   <v-app>
     <v-app-bar absolute app color="teal darken-2" dark dense>
       <v-app-bar-nav-icon @click="drawer = !drawer"></v-app-bar-nav-icon>
+      <v-card-title>Тест</v-card-title>
 
       <v-spacer />
       <v-btn icon @click.stop="switchSound"
@@ -45,7 +46,7 @@
               >Начать сначала</v-list-item-title
             >
           </v-list-item>
-          <v-list-item nuxt to="/" @click="drawer = false">
+          <v-list-item nuxt to="/history" @click="drawer = false">
             <v-list-item-title style="font-size: 1.2rem"
               >Посмотреть историю</v-list-item-title
             >
@@ -58,11 +59,6 @@
     </v-main>
 
     <v-dialog v-model="dialogStartPage" persistent max-width="290">
-      <!-- <template v-slot:activator="{ on, attrs }">
-        <v-btn color="primary" dark v-bind="attrs" v-on="on">
-          Open Dialog
-        </v-btn>
-      </template> -->
       <v-card>
         <v-card-title class="text-h5">
           Вы хотите начать<br />сначала?
@@ -108,7 +104,13 @@ export default {
     },
     startAgain() {
       this.drawer = !this.drawer;
-      this.dialogStartPage = true;
+      if (this.$route.name.indexOf("/test/") > 0) {
+        this.dialogStartPage = true;
+      } else {
+        this.$router.push({
+          path: "/",
+        });
+      }
     },
     async switchSound() {
       await this.$store.dispatch("quiz/switchSound");

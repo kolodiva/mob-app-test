@@ -5,18 +5,28 @@
     width="100%"
     height="100%"
     img="/background-picture.jpg"
-    class="d-flex flex-column justify-space-around align-center"
+    class="d-flex flex-column justify-start align-center px-3 py-5"
   >
-    <v-btn
-      v-for="(item, i) in points"
-      :key="i"
-      class="py-6"
-      width="70%"
-      rounded
-      :style="backgroundColor"
-      @click.stop="proxy(item[1], item[2])"
-      >{{ item[0] }}
-    </v-btn>
+    <v-expansion-panels focusable inset>
+      <v-expansion-panel
+        v-for="(item, i) in rows"
+        :key="i"
+        :style="backgroundColor"
+      >
+        <v-expansion-panel-header>
+          Тест от {{ item.data_test }}, {{ item.score }} бал.
+        </v-expansion-panel-header>
+        <v-expansion-panel-content>
+          <v-card-text
+            v-for="(item1, i1) in item.res"
+            :key="10 * i1"
+            style="font-size: 0.9rem"
+          >
+            {{ i1 + 1 }}. {{ item1.quest }}
+          </v-card-text>
+        </v-expansion-panel-content>
+      </v-expansion-panel>
+    </v-expansion-panels>
 
     <div />
   </v-card>
@@ -26,11 +36,13 @@
 import { mapGetters } from "vuex";
 
 export default {
-  // async fetch() {
-  //   const rows = await this.$api("getInfo", {});
-  //   console.log(rows);
-  // },
+  async fetch() {
+    const connectionid = this.$cookies.get("connectionid");
+    this.rows = await this.$api("getHistory", { connectionid });
+    // console.log(rows);
+  },
   data: () => ({
+    rows: [],
     loading: false,
     selection: 1,
     backgroundColor: {
