@@ -13,14 +13,14 @@
         :key="i"
         :style="backgroundColor"
       >
-        <v-expansion-panel-header>
+        <v-expansion-panel-header style="font-size: 1.2rem">
           Тест от {{ item.data_test }}, {{ item.score }} бал.
         </v-expansion-panel-header>
         <v-expansion-panel-content>
           <v-card-text
             v-for="(item1, i1) in item.res"
             :key="10 * i1"
-            style="font-size: 0.9rem"
+            style="font-size: 1.1rem"
           >
             {{ i1 + 1 }}. {{ item1.quest }}
           </v-card-text>
