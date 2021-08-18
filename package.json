@@ -22,6 +22,7 @@
     "@vueuse/sound": "^1.1.7",
     "cookie-universal-nuxt": "^2.1.5",
     "cross-env": "^7.0.2",
+    "dotenv": "^9.0.2",
     "express": "^4.17.1",
     "lodash": "^4.17.21",
     "mongodb": "^4.1.0",

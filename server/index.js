@@ -6,6 +6,11 @@ const app = express()
 const https = require('https')
 
 
+//console.log(`Your port is ${process.env.PORT}`); // undefined
+const dotenv = require('dotenv');
+dotenv.config();
+//console.log(`Your port is ${process.env.PORT}`); // 8626
+
 app.use(cookieParser())
 
 
@@ -18,14 +23,14 @@ async function start() {
   const nuxt = new Nuxt(config)
 
   if (process.env.NODE_ENV == 'production') {
-    host = 'localhost'; port = 3000;
+    host = 'localhost'; port = process.env.PORT;
     //host = '192.168.1.105'; port = 3000;
   } else {
     //const { host, port } = nuxt.options.server;
     //host = '192.168.1.41'; port = 3000;
     //host = '192.168.1.105'; port = 5000;
 
-    host = 'localhost'; port = 3000;
+    host = 'localhost'; port = process.env.PORT;
     //host = 'localhost'; port = 7000;
   }
 
