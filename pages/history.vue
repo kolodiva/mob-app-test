@@ -47,7 +47,7 @@
 
 <script>
 import { mapGetters } from "vuex";
-
+// #45f1e13b
 export default {
   async fetch() {
     const connectionid = this.$cookies.get("connectionid");
@@ -59,7 +59,7 @@ export default {
     loading: false,
     selection: 1,
     backgroundColor: {
-      backgroundColor: "#45f1e13b",
+      backgroundColor: "rgba(17, 145, 133, 0.7)",
       color: "white",
       fontSize: "1.1rem",
     },

@@ -46,11 +46,14 @@ export async function closeNewQuiz({connectionid, test, score}) {
 
   await mongo.connect();
 
+  const db = mongo.db('sampleDB').collection('history');
+  const dbCount = await db.count() + 1;
+
   //const res1 = await mongo.db('sampleDB').collection('history').find({}).toArray();
-  await mongo.db('sampleDB').collection('history').findOneAndUpdate(
+  await db.findOneAndUpdate(
     {connectionid: connectionid, completed: false},
-    { '$set': {completed: true, res: test, score: score, data_test: getDateTime()}, '$inc':{sort: 1}},
-    {returnDocument: 'after', upsert: true}
+    { '$set': {completed: true, res: test, score: score, data_test: getDateTime(), sort: dbCount }},
+    {upsert: true}
   );
 
 }

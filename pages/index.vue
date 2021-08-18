@@ -40,7 +40,7 @@ export default {
     },
     points: [
       ["Сухая теория", "theory", 0],
-      ["Простой тест", "clickButton", 5],
+      ["Простой тест", "clickButton", 2],
       ["Почти простой тест", "clickButton", 10],
       ["НЕ Простой тест", "clickButton", 15],
     ],

@@ -11,7 +11,7 @@ export const actions = {
       connectionid = uuidv4();
       this.$cookies.set("connectionid", connectionid, {
         path: "/",
-        maxAge: 60 * 60 * 24 * 60,
+        maxAge: 360 * 60 * 24 * 60,
       });
     }
 

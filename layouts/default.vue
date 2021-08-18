@@ -2,7 +2,7 @@
   <v-app>
     <v-app-bar absolute app color="teal darken-2" dark dense>
       <v-app-bar-nav-icon @click="drawer = !drawer"></v-app-bar-nav-icon>
-      <v-card-title>Тест</v-card-title>
+      <v-card-title>Тест им.Макаровой</v-card-title>
 
       <v-spacer />
       <v-btn icon @click.stop="switchSound"
