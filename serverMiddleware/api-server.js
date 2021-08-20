@@ -1,3 +1,4 @@
+
 export default async (req, res, next) => {
 
   //console.log(req._parsedUrl.pathname)
@@ -29,7 +30,9 @@ export default async (req, res, next) => {
   if (result && result.status) {
     res.status(result.status).end(result.msg);
   } else {
-    res.end(JSON.stringify(result));
+    const _data = JSON.stringify(result);
+    res.setHeader('Content-Type', 'application/json', 'charset', 'utf-8');
+    res.end(_data);
   }
 
 };
