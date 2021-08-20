@@ -12,7 +12,7 @@ function getDateTime() {
 
 export async function getcdata() {
   await mongo.connect();
-  return await mongo.db('sampleDB').collection('testDB').find({}).toArray();
+  return await mongo.db('sampleDB').collection('testDB').find({}, { _id: 0 }).toArray();
 }
 
 export async function getInfo() {
