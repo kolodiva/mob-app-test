@@ -10,6 +10,11 @@ function getDateTime() {
     return dateTime;
 }
 
+export async function getcdata() {
+  await mongo.connect();
+  return await mongo.db('sampleDB').collection('testDB').find({}).toArray();
+}
+
 export async function getInfo() {
   await mongo.connect();
   return await mongo.db('sampleDB').collection('simpleTest').find({}).toArray();

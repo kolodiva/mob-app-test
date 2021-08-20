@@ -83,7 +83,6 @@
 <script>
 import { mapGetters } from "vuex";
 // const consola = require('consola')
-
 export default {
   data: () => ({ drawer: false, group: null, dialogStartPage: false }),
   computed: {
@@ -96,7 +95,6 @@ export default {
       this.dialogStartPage = false;
       if (idx === 1) {
         await this.$store.dispatch("quiz/clearResQuiz");
-
         this.$router.push({
           path: "/",
         });

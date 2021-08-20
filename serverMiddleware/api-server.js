@@ -22,6 +22,8 @@ export default async (req, res, next) => {
 
   let result = await api[ method ](req.params, res);
 
+  //console.log(result);
+
   //res.setHeader("Set-Cookie", "SameSite=None; Secure");
 
   if (result && result.status) {
