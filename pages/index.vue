@@ -39,7 +39,7 @@ export default {
       fontSize: "1.1rem",
     },
     points: [
-      ["Сухая теория", "theory", 0],
+      ["Теория", "theory", 0],
       ["Простой тест", "clickButton", 5],
       ["Почти простой тест", "clickButton", 10],
       ["НЕ Простой тест", "clickButton", 15],

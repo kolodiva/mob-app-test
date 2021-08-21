@@ -17,7 +17,7 @@
     />
     <v-card-title class="pb-1 d-flex justify-space-between">
       <div>Вопрос: {{ quest + 1 }}/{{ quiz.length }}</div>
-      <div>Баллоф: {{ score }}/{{ inTotale }}</div>
+      <div>Баллов: {{ score }}/{{ inTotale }}</div>
     </v-card-title>
 
     <v-card-text style="font-size: 1.2rem" class="white--text">
@@ -91,17 +91,16 @@
       <v-card>
         <v-card-title class="text-h5">
           Поздравляем,<br />
-          Вы завершили тест. <br />Ваш результат
-          {{ inTotale }} балла(ов).<br />Такого еще НЕ было в истории тестов !!!
+          Вы завершили тест.<br />Ваш результат<br />{{ inTotale }} балла(ов).
         </v-card-title>
         <v-card-text
-          >Ваши Результаты будут помещены в Исторический Архив и будут доступны
-          в следующие 100 лет.</v-card-text
+          >Ваши Результаты будут помещены в Архив и будут доступны для
+          просмотра.</v-card-text
         >
         <v-card-actions>
           <v-spacer></v-spacer>
           <v-btn color="green darken-1" text @click="resModalQuest(0)">
-            Ок, Бро.
+            Понятно.
           </v-btn>
         </v-card-actions>
       </v-card>
