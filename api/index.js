@@ -10,9 +10,16 @@ function getDateTime() {
     return dateTime;
 }
 
-export async function getcdata() {
+export async function getcdata(params) {
+
+  //console.log(params)
   await mongo.connect();
-  return await mongo.db('sampleDB').collection('testDB').find({}).project({_id : 0}).toArray();
+  if (params && params.id) {
+    return await mongo.db('sampleDB').collection('testDB').find({"artikul":params.id}).project({_id : 0}).toArray();
+  } else {
+      return await mongo.db('sampleDB').collection('testDB').find({}).project({_id : 0}).toArray();
+  }
+
 }
 
 export async function getInfo() {
