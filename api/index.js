@@ -15,7 +15,7 @@ export async function getcdata(params) {
   //console.log(params)
   await mongo.connect();
   if (params && params.id) {
-    return await mongo.db('sampleDB').collection('testDB').find({"artikul":params.id}).project({_id : 0}).toArray();
+    return await mongo.db('sampleDB').collection('testDB').find({"code":params.id}).project({_id : 0}).toArray();
   } else {
       return await mongo.db('sampleDB').collection('testDB').find({}).project({_id : 0}).toArray();
   }
