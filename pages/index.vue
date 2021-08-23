@@ -40,9 +40,9 @@ export default {
     },
     points: [
       ["Теория", "theory", 0],
-      ["Простой тест", "clickButton", 5],
-      ["Почти простой тест", "clickButton", 10],
-      ["НЕ Простой тест", "clickButton", 15],
+      ["Простой тест (5 в.)", "clickButton", 5],
+      ["Средний тест (10 в.)", "clickButton", 10],
+      ["Большой тест (15 в.)", "clickButton", 15],
     ],
   }),
   computed: {
