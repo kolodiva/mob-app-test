@@ -1,5 +1,7 @@
 <template>
   <v-sheet class="d-flex flex-column justify-start align-center">
+    <TheVideo1 />
+    <TheVideo2 />
     <v-card v-for="(item, i) in rows" :key="i" shaped width="90%" class="mt-3">
       <v-card-text style="font-size: 1.2rem" class="">
         Тестовое задание № {{ i + 1 }}
@@ -24,6 +26,8 @@
 </template>
 
 <script>
+// import TheVideo1 from "@/components/TheVideo1.vue";
+
 export default {
   async fetch() {
     this.rows = await this.$api("getInfo", {});
@@ -42,3 +46,9 @@ export default {
   methods: {},
 };
 </script>
+
+<style lang="scss" scoped>
+.video-player-box {
+  min-height: 200px;
+}
+</style>

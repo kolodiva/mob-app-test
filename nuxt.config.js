@@ -70,6 +70,7 @@ module.exports = {
    ** Global CSS
    */
   css: [
+    'video.js/dist/video-js.css'
   ],
 
 // '~/api/index.js'
@@ -94,7 +95,7 @@ module.exports = {
   plugins: [
     {src: '~/plugins/api-context.client.js'},
     {src: '~/plugins/api-context.server.js'},
-
+    { src: '~plugins/nuxt-video-player-plugin.js', ssr: false },
     // {src: '~/plugins/virtualscrolllist.js', mode: 'client' }
 
     // { src: '~/plugins/ymapPlugin.js', mode: 'client' },
