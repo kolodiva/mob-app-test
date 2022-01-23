@@ -15,7 +15,7 @@
       >
         <v-expansion-panel-header style="font-size: 1.2rem">
           Тест от {{ item.data_test }},<br />{{ item.res.length }} вопр.,
-          {{ item.score }} бал.
+          {{ item.score }} бал.<br />{{ getUserInfo(item) }}
         </v-expansion-panel-header>
         <v-expansion-panel-content>
           <v-card-text
@@ -25,16 +25,13 @@
           >
             {{ i1 + 1 }}. {{ item1.quest }}
             <v-card-text style="font-size: 1rem">
-              Баллы:
-              {{ item1.score }},<br />
-              Ваши ответы:
-              {{ Object.entries(item1.var1)[item1.res.var1 - 1][0] }},
-              {{ Object.entries(item1.var2)[item1.res.var2 - 1][0] }}<br />
-              Правильные ответы:
-              {{
-                Object.keys(item1.var1).find((key) => item1.var1[key] === 1)
-              }},
-              {{ Object.keys(item1.var2).find((key) => item1.var2[key] === 1) }}
+              Баллов:
+              {{ item1.score }},<br /><br />
+              <span class="font-weight-bold">Ваш ответ:</span><br />
+              {{ Object.entries(item1.var1)[item1.res.var1 - 1][0] }}
+              <br /><br />
+              <span class="font-weight-bold">Правильный ответ:</span><br />
+              {{ Object.keys(item1.var1).find((key) => item1.var1[key] === 1) }}
             </v-card-text>
           </v-card-text>
         </v-expansion-panel-content>
@@ -81,6 +78,15 @@ export default {
   },
 
   methods: {
+    getUserInfo(item) {
+      let res = "";
+
+      if (item && item.userinfo) {
+        res = `${item.userinfo.infoStudy}, возр: ${item.userinfo.infoAge}, курс/класс: ${item.userinfo.infoClass} `;
+      }
+
+      return res;
+    },
     proxy(method, payload) {
       this[method](payload);
     },

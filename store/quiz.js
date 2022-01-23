@@ -4,13 +4,31 @@ export const state = () => ({
   quiz: [],
   curQuiz: [],
   soundOff: false,
+  userInfo: null,
 });
 
 export const mutations = {
   SET_QUIZ(state, data) {
+    //
+    if (data) {
+      data.forEach((rec) => {
+        rec.var1 = Object.fromEntries(
+          Object.entries(rec.var1).sort(() => Math.random() - 0.5)
+        );
+      });
+    }
+
     state.quiz = data;
   },
   SET_CUR_QUIZ(state, data) {
+    if (data) {
+      data.forEach((rec) => {
+        rec.var1 = Object.fromEntries(
+          Object.entries(rec.var1).sort(() => Math.random() - 0.5)
+        );
+      });
+    }
+
     state.curQuiz = data;
   },
   SET_NEW_QUIZ(state, { numQuest }) {
@@ -37,6 +55,9 @@ export const mutations = {
   SET_SOUND_OFF(state) {
     state.soundOff = !state.soundOff;
   },
+  UPDATE_USER_INFO(state, data) {
+    state.userInfo = data;
+  },
 };
 
 export const getters = {
@@ -55,6 +76,9 @@ export const getters = {
   getSoundOff: (state) => {
     return state.soundOff;
   },
+  getUserInfo: (state) => {
+    return state.userInfo;
+  },
 };
 
 export const actions = {
@@ -62,9 +86,9 @@ export const actions = {
     let rows = await this.$api("getInfo");
     await commit("SET_QUIZ", rows);
     rows = await this.$api("getInfoCurQuiz", { connectionid });
-
     if (rows[0]) {
       await commit("SET_CUR_QUIZ", rows[0].res);
+      await commit("UPDATE_USER_INFO", rows[0].userinfo);
     }
   },
   async switchSound({ commit, dispatch, state }) {
@@ -78,6 +102,7 @@ export const actions = {
 
     if (newTest) {
       const rows = await this.$api("getInfo");
+
       await commit("SET_QUIZ", rows);
 
       await commit("SET_NEW_QUIZ", data);
@@ -89,6 +114,7 @@ export const actions = {
       await this.$api("createNewQuiz", {
         connectionid,
         test: state.curQuiz,
+        userinfo: state.userInfo,
       });
     }
   },
@@ -102,6 +128,7 @@ export const actions = {
     await this.$api("createNewQuiz", {
       connectionid,
       test: state.curQuiz,
+      userinfo: state.userInfo,
     });
   },
   async clearOnlyResQuiz({ commit, dispatch, state }) {
@@ -137,6 +164,11 @@ export const actions = {
       connectionid,
       score,
       test: state.curQuiz,
+      userinfo: state.userInfo,
     });
+  },
+  async updateUserInfo({ commit, dispatch, state }, { data }) {
+    // consola.info(rows);
+    await commit("UPDATE_USER_INFO", data);
   },
 };

@@ -4,83 +4,76 @@
     flat
     tile
     width="100%"
-    height="100%"
+    min-height="100%"
     img="/background-picture.jpg"
     class="pt-5"
   >
-    <v-img
-      :src="quiz[quest].pic"
-      max-width="90%"
-      min-height="170px"
-      contain
-      class="mx-auto"
-    />
-    <v-card-title class="pb-1 d-flex justify-space-between">
-      <div>Вопрос: {{ quest + 1 }}/{{ quiz.length }}</div>
-      <div>Баллов: {{ score }}/{{ inTotale }}</div>
-    </v-card-title>
-
-    <v-card-text style="font-size: 1.2rem" class="white--text">
-      {{ quiz[quest].quest }}
-    </v-card-text>
-
-    <v-card-actions class="mt-n6"
-      ><v-card-title>Варианты анализов</v-card-title>
+    <v-toolbar dense color="transparent" flat>
+      <v-chip style="font-size: 1.2rem"
+        >Вопрос: {{ quest + 1 }}/{{ quiz.length }}</v-chip
+      >
       <v-spacer />
-      <v-btn light :disabled="!able" rounded @click="contin">
-        {{ quiz.length === quest + 1 ? "Завершить" : "Далее" }}
-      </v-btn>
-    </v-card-actions>
+      <v-chip style="font-size: 1.2rem">Баллов: {{ inTotale }}</v-chip>
+    </v-toolbar>
 
-    <v-card-text class="mt-n8">
-      <v-chip-group
-        v-model="selection2"
-        active-class="blue accent-4 white--text"
-        column
-      >
-        <v-chip
-          v-for="(item, i) in Object.entries(quiz[quest].var2)"
-          :key="i"
-          style="font-size: 1.2rem"
-          @click.stop="clickButton(2, i, selection2)"
-        >
-          {{ item[0] }}
-          <v-chip
-            v-if="i === trueAnswer[1] && passed"
-            class="ml-1"
-            color="green"
-            x-small
-            >ок</v-chip
+    <v-sheet
+      color="grey lighten-3"
+      rounded="xl"
+      class="mx-auto mt-3 pa-3"
+      width="90%"
+      ><span style="font-size: 1.2rem">{{ quiz[quest].quest }}</span></v-sheet
+    >
+
+    <v-row justify="center" class="mt-4">
+      <v-col cols="11">
+        <v-sheet elevation="10" rounded="xl">
+          <v-sheet
+            class="pa-3 teal text-center"
+            style="font-size: 1.2rem"
+            dark
+            rounded="t-xl"
           >
-        </v-chip>
-      </v-chip-group>
-    </v-card-text>
+            <v-toolbar dense color="transparent" flat>
+              <v-toolbar-title
+                style="font-size: 1.4rem"
+                color="transparent"
+                class="ml-n3"
+                >Варианты</v-toolbar-title
+              >
+              <v-spacer />
+              <v-btn light :disabled="!able" rounded @click="contin">
+                {{ quiz.length === quest + 1 ? "Завершить" : "Далее" }}
+              </v-btn>
+            </v-toolbar>
+          </v-sheet>
 
-    <v-card-title class="mt-n6">Варианты ответов</v-card-title>
-
-    <v-card-text class="mt-n4">
-      <v-chip-group
-        v-model="selection1"
-        active-class="blue accent-4 white--text"
-        column
-      >
-        <v-chip
-          v-for="(item, i) in Object.entries(quiz[quest].var1)"
-          :key="i"
-          style="font-size: 1.2rem"
-          @click.stop="clickButton(1, i, selection1)"
-        >
-          {{ item[0] }}
-          <v-chip
-            v-if="i === trueAnswer[0] && passed"
-            class="ml-1"
-            color="green"
-            x-small
-            >ок</v-chip
-          >
-        </v-chip>
-      </v-chip-group>
-    </v-card-text>
+          <div class="pa-2">
+            <v-chip-group
+              v-model="selection1"
+              active-class="blue accent-4 white--text"
+              column
+            >
+              <v-chip
+                v-for="(item, i) in Object.entries(quiz[quest].var1)"
+                :key="i"
+                class="pa-3 my-3"
+                style="font-size: 1.3rem; height: auto; white-space: normal"
+                @click.stop="clickButton(1, i, selection1)"
+              >
+                {{ item[0] }}
+                <v-chip
+                  v-if="i === trueAnswer[0] && passed"
+                  class="ml-1"
+                  color="green"
+                  x-small
+                  >ок</v-chip
+                >
+              </v-chip>
+            </v-chip-group>
+          </div>
+        </v-sheet>
+      </v-col>
+    </v-row>
 
     <v-dialog v-model="dialogInTotal" persistent max-width="290">
       <!-- <template v-slot:activator="{ on, attrs }">
@@ -157,7 +150,7 @@ export default {
       inTotale: "quiz/getInTotale",
     }),
     able() {
-      return this.selection1 !== undefined && this.selection2 !== undefined;
+      return this.selection1 !== undefined;
     },
   },
 
@@ -183,9 +176,6 @@ export default {
     // console.log(this.quiz[this.quest]);
     if (this.quiz[this.quest].res.var1 > 0) {
       this.selection1 = this.quiz[this.quest].res.var1 - 1;
-    }
-    if (this.quiz[this.quest].res.var2 > 0) {
-      this.selection2 = this.quiz[this.quest].res.var2 - 1;
     }
 
     //
@@ -228,9 +218,7 @@ export default {
     async contin() {
       if (this.passed === 1) {
       } else {
-        const score =
-          (this.trueAnswer[0] === this.selection1 ? 0.5 : 0) +
-          (this.trueAnswer[1] === this.selection2 ? 0.5 : 0);
+        const score = this.trueAnswer[0] === this.selection1 ? 1 : 0;
 
         if (!this.soundOff) {
           if (score === 1) {

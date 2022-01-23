@@ -37,7 +37,7 @@ export async function getInfoCurQuiz({connectionid}) {
   return await mongo.db('sampleDB').collection('history').find({connectionid: connectionid, completed: false}).toArray();
 }
 
-export async function createNewQuiz({connectionid, test}) {
+export async function createNewQuiz({connectionid, test, userinfo}) {
 
   //console.log(connectionid);
   await mongo.connect();
@@ -45,14 +45,14 @@ export async function createNewQuiz({connectionid, test}) {
   //const res1 = await mongo.db('sampleDB').collection('history').find({}).toArray();
   const res1 = await mongo.db('sampleDB').collection('history').findOneAndUpdate(
     {connectionid: connectionid, completed: false},
-    { '$set': {completed: false, res: test} },
+    { '$set': {completed: false, res: test, userinfo} },
     {upsert: true}
   );
 
   return {rows: res1.value}
 }
 
-export async function closeNewQuiz({connectionid, test, score}) {
+export async function closeNewQuiz({connectionid, test, score, userinfo}) {
 
   //console.log(connectionid);
 
@@ -64,7 +64,7 @@ export async function closeNewQuiz({connectionid, test, score}) {
   //const res1 = await mongo.db('sampleDB').collection('history').find({}).toArray();
   await db.findOneAndUpdate(
     {connectionid: connectionid, completed: false},
-    { '$set': {completed: true, res: test, score: score, data_test: getDateTime(), sort: dbCount }},
+    { '$set': {completed: true, res: test, score: score, userinfo, data_test: getDateTime(), sort: dbCount }},
     {upsert: true}
   );
 
