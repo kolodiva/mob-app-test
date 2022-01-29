@@ -118,6 +118,54 @@
         </v-card-actions>
       </v-card>
     </v-dialog>
+    <v-dialog v-model="dialogDopInfo" persistent max-width="85%">
+      <v-card>
+        <v-card-title
+          v-html="
+            'Правильный ответ:<br/>' +
+            Object.keys(quiz[quest].var1).find(
+              (key) => quiz[quest].var1[key] === 1
+            )
+          "
+        />
+
+        <v-stepper v-model="e6" vertical>
+          <div
+            v-for="(pos, i) in [quiz[quest].quest].concat(quiz[quest].theory)"
+            :key="i"
+          >
+            <v-stepper-step
+              :complete="e6 > i + 1"
+              :step="i + 1"
+              editable
+              class="pt-6 subtitle-1"
+              >{{ dopInfo[i] }}</v-stepper-step
+            >
+            <v-stepper-content :step="i + 1" class="ml-1 mt-n10">
+              <v-card-text class="body-2">{{ pos }}</v-card-text>
+
+              <div class="d-flex">
+                <v-spacer></v-spacer>
+                <v-chip
+                  class=""
+                  :color="
+                    e6 === quiz[quest].theory.length + 1 ? 'red' : 'green'
+                  "
+                  outlined
+                  @click="dopInfoContin(i)"
+                >
+                  {{
+                    e6 === quiz[quest].theory.length + 1
+                      ? "След.вопрос"
+                      : "Далее"
+                  }}
+                </v-chip>
+              </div>
+            </v-stepper-content>
+          </div>
+        </v-stepper>
+      </v-card>
+    </v-dialog>
   </v-card>
 </template>
 
@@ -129,6 +177,7 @@ export default {
   data: () => ({
     dialogInTotal: false,
     dialogNoChange: false,
+    dialogDopInfo: false,
     quest: 0,
     loading: false,
     selection1: undefined,
@@ -141,6 +190,13 @@ export default {
     trueAnswer: [],
     score: 0,
     passed: 0,
+    dopInfo: [
+      "Вопрос",
+      "Подробное описание болезни",
+      "Факторы риска",
+      "Профилактика",
+    ],
+    e6: 1,
   }),
 
   computed: {
@@ -215,41 +271,53 @@ export default {
         this.$sounds.itsok.play();
       }
     },
-    async contin() {
-      if (this.passed === 1) {
+    dopInfoContin(i) {
+      if (this.e6 === this.quiz[this.quest].theory.length + 1) {
+        this.contin();
       } else {
-        const score = this.trueAnswer[0] === this.selection1 ? 1 : 0;
-
-        if (!this.soundOff) {
-          if (score === 1) {
-            this.$sounds.itsgood.play();
-          } else {
-            this.$sounds.itsbad.play();
-          }
-        }
-
-        // console.log(quiz);
-
-        // console.log(this.lastQuiz);
-        await this.$store.dispatch("quiz/updateResQuiz", {
-          data: {
-            quest: this.quest,
-            var1: this.selection1,
-            var2: this.selection2,
-            score,
-            passed: 1,
-          },
-        });
+        this.e6 = i + 2;
       }
+    },
+    async contin() {
+      // после ответа прогоняем теорию
+      if (!this.dialogDopInfo) {
+        if (this.passed === 1) {
+        } else {
+          const score = this.trueAnswer[0] === this.selection1 ? 1 : 0;
 
-      if (this.quiz.length === this.quest + 1) {
-        this.dialogInTotal = true;
+          if (!this.soundOff) {
+            if (score === 1) {
+              this.$sounds.itsgood.play();
+            } else {
+              this.$sounds.itsbad.play();
+            }
+          }
+
+          // console.log(quiz);
+
+          // console.log(this.lastQuiz);
+          await this.$store.dispatch("quiz/updateResQuiz", {
+            data: {
+              quest: this.quest,
+              var1: this.selection1,
+              var2: this.selection2,
+              score,
+              passed: 1,
+            },
+          });
+        }
+        this.dialogDopInfo = true;
       } else {
-        const nextPage = this.quest + 2;
+        this.dialogDopInfo = false;
+        if (this.quiz.length === this.quest + 1) {
+          this.dialogInTotal = true;
+        } else {
+          const nextPage = this.quest + 2;
 
-        this.$router.push({
-          path: `/test/${nextPage}`,
-        });
+          this.$router.push({
+            path: `/test/${nextPage}`,
+          });
+        }
       }
     },
   },

@@ -93,9 +93,8 @@ export default {
     },
     points: [
       ["Теория", "theory", 0],
-      ["Простой тест (5 в.)", "clickButton", 5],
-      ["Средний тест (10 в.)", "clickButton", 10],
-      ["Большой тест (15 в.)", "clickButton", 15],
+      ["Пройти тест (10 в.)", "clickButton", 10],
+      ["Архив", "history", 0],
     ],
     itemsAges: ["5-10", "10-15", "15-20", "20-25", "25-..."],
     itemsClasses: [1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12],
@@ -113,13 +112,6 @@ export default {
     }),
   },
 
-  mounted() {
-    // console.log(this.quiz);
-    // if (!this.userInfo && this.quest === 0) {
-    //   this.dialogContactInfo = true;
-    // }
-  },
-
   methods: {
     proxy(method, payload) {
       this[method](payload);
@@ -127,6 +119,11 @@ export default {
     theory() {
       this.$router.push({
         path: "/theory",
+      });
+    },
+    history() {
+      this.$router.push({
+        path: "/history",
       });
     },
     async clickButton(numQuest) {

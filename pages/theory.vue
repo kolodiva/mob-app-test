@@ -33,10 +33,6 @@ export default {
       fontSize: "1.1rem",
     },
   }),
-
-  mounted() {},
-
-  methods: {},
 };
 </script>
 
