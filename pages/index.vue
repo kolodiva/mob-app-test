@@ -34,7 +34,7 @@
           <v-select
             v-model="infoAge"
             :items="itemsAges"
-            label="Возраст"
+            label="Специализация"
             dense
             style="width: 90%"
             class="mx-auto"
@@ -96,7 +96,7 @@ export default {
       ["Пройти тест (10 в.)", "clickButton", 10],
       ["Архив", "history", 0],
     ],
-    itemsAges: ["5-10", "10-15", "15-20", "20-25", "25-..."],
+    itemsAges: ["медицинский профиль", "иное"],
     itemsClasses: [1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12],
     infoStudy: null,
     infoAge: null,

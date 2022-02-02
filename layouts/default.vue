@@ -2,7 +2,9 @@
   <v-app>
     <v-app-bar absolute app color="teal darken-2" dark dense>
       <v-app-bar-nav-icon @click="drawer = !drawer"></v-app-bar-nav-icon>
-      <v-card-title>Тест им.Макаровой</v-card-title>
+      <v-card-subtitle style="font-size: 1.2rem"
+        >Тест симптомов опасных болезней</v-card-subtitle
+      >
 
       <v-spacer />
       <v-btn icon @click.stop="switchSound"
@@ -100,11 +102,13 @@ export default {
         });
       }
     },
-    startAgain() {
+    async startAgain() {
       this.drawer = !this.drawer;
       if (this.$route.name.indexOf("/test/") > 0) {
         this.dialogStartPage = true;
       } else {
+        await this.$store.dispatch("quiz/clearOnlyResQuiz");
+
         this.$router.push({
           path: "/",
         });

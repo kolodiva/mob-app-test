@@ -82,17 +82,44 @@
         </v-btn>
       </template> -->
       <v-card>
-        <v-card-title class="text-h5">
+        <v-card-title class="text-h6">
           Поздравляем,<br />
           Вы завершили тест.<br />Ваш результат<br />{{ inTotale }} балла(ов).
         </v-card-title>
-        <v-card-text
-          >Ваши Результаты будут помещены в Архив и будут доступны для
-          просмотра.</v-card-text
+        <v-card-text style="font-size: 1.1rem"
+          >Благодарим Вас за участие в тесте. Ваши Результаты будут помещены в
+          Архив и будут доступны для просмотра.</v-card-text
         >
+        <v-card-actions class="px-3 mt-n11">
+          <v-radio-group v-model="radios" class="">
+            <template v-slot:label>
+              <v-card-text style="font-size: 1.1rem"
+                ><strong>Как Вам кажется</strong>, помог (помогут) ли этот
+                (подобный) тест повысить интерес к здоровью и здоровому образу
+                жизни?</v-card-text
+              >
+            </template>
+            <v-radio value="yes" class="ml-3" color="success">
+              <template v-slot:label>
+                <div><strong class="success--text">Да</strong></div>
+              </template>
+            </v-radio>
+            <v-radio value="no" class="ml-3" color="error">
+              <template v-slot:label>
+                <div><strong class="red--text">Нет</strong></div>
+              </template>
+            </v-radio>
+          </v-radio-group>
+        </v-card-actions>
+
         <v-card-actions>
           <v-spacer></v-spacer>
-          <v-btn color="green darken-1" text @click="resModalQuest(0)">
+          <v-btn
+            color="green darken-1"
+            :disabled="radios === ''"
+            text
+            @click="resModalQuest(0)"
+          >
             Понятно.
           </v-btn>
         </v-card-actions>
@@ -138,11 +165,12 @@
               :complete="e6 > i + 1"
               :step="i + 1"
               editable
-              class="pt-6 subtitle-1"
+              class="pt-6 mb-3"
+              style="font-size: 1.2rem"
               >{{ dopInfo[i] }}</v-stepper-step
             >
             <v-stepper-content :step="i + 1" class="ml-1 mt-n10">
-              <v-card-text class="body-2">{{ pos }}</v-card-text>
+              <v-card-text style="font-size: 1.1rem">{{ pos }}</v-card-text>
 
               <div class="d-flex">
                 <v-spacer></v-spacer>
@@ -175,6 +203,7 @@ import { mapGetters } from "vuex";
 export default {
   middleware: ["redirect_home"],
   data: () => ({
+    radios: "",
     dialogInTotal: false,
     dialogNoChange: false,
     dialogDopInfo: false,
@@ -257,7 +286,9 @@ export default {
 
   methods: {
     async resModalQuest(idx) {
-      await this.$store.dispatch("quiz/closeResQuiz");
+      await this.$store.dispatch("quiz/closeResQuiz", {
+        data: { lastquiestion: this.radios },
+      });
       await this.$store.dispatch("quiz/clearOnlyResQuiz");
 
       this.dialogInTotal = false;

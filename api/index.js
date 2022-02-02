@@ -45,14 +45,14 @@ export async function createNewQuiz({connectionid, test, userinfo}) {
   //const res1 = await mongo.db('sampleDB').collection('history').find({}).toArray();
   const res1 = await mongo.db('sampleDB').collection('history').findOneAndUpdate(
     {connectionid: connectionid, completed: false},
-    { '$set': {completed: false, res: test, userinfo} },
+    { '$set': {completed: false, res: test, userinfo, lastquestion: ''} },
     {upsert: true}
   );
 
   return {rows: res1.value}
 }
 
-export async function closeNewQuiz({connectionid, test, score, userinfo}) {
+export async function closeNewQuiz({connectionid, test, score, userinfo, lastquestion}) {
 
   //console.log(connectionid);
 
@@ -64,7 +64,7 @@ export async function closeNewQuiz({connectionid, test, score, userinfo}) {
   //const res1 = await mongo.db('sampleDB').collection('history').find({}).toArray();
   await db.findOneAndUpdate(
     {connectionid: connectionid, completed: false},
-    { '$set': {completed: true, res: test, score: score, userinfo, data_test: getDateTime(), sort: dbCount }},
+    { '$set': {completed: true, res: test, score: score, userinfo, lastquestion, data_test: getDateTime(), sort: dbCount }},
     {upsert: true}
   );
 

@@ -147,7 +147,7 @@ export const actions = {
       test: state.curQuiz,
     });
   },
-  async closeResQuiz({ commit, dispatch, state }) {
+  async closeResQuiz({ commit, dispatch, state }, { data }) {
     // consola.info(rows);
     // await commit("SET_CUR_QUIZ", []);
 
@@ -165,6 +165,7 @@ export const actions = {
       score,
       test: state.curQuiz,
       userinfo: state.userInfo,
+      lastquestion: data.lastquiestion,
     });
   },
   async updateUserInfo({ commit, dispatch, state }, { data }) {
